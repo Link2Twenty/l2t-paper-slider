@@ -1,0 +1,196 @@
+<link rel="import" href="../polymer/polymer.html"> <dom-module id="l2t-paper-slider">
+  <style>
+    .slider {
+      position: relative;
+      overflow: hidden;
+      display: box;
+      display: -webkit-box;
+      white-space: nowrap
+    }
+    .slider__slides {
+      position: relative;
+      height: 100%;
+      background: #FFCDD2;
+      -webkit-transition: -webkit-transform .3s cubic-bezier(.51, .92, .24, 1);
+      transition: -webkit-transform .3s cubic-bezier(.51, .92, .24, 1);
+      transition: transform .3s cubic-bezier(.51, .92, .24, 1);
+      transition: transform .3s cubic-bezier(.51, .92, .24, 1), -webkit-transform .3s cubic-bezier(.51, .92, .24, 1);
+      will-change: transform
+    }
+    .slider__dots {
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      position: absolute;
+      bottom: 5%;
+      left: 50%;
+      -webkit-transform: translateX(-50%);
+      transform: translateX(-50%)
+    }
+    .slider__dot,
+    .slider__indicator {
+      display: block;
+      margin: 0 .5em;
+      width: 1em;
+      height: 1em;
+      background: var(--paper-slide-dot, rgba(255, 255, 255, .5));
+      border-radius: 100px
+    }
+    .slider__indicator {
+      position: absolute;
+      background: var(--paper-slide-dot-selected, #FFF);
+      width: auto
+    }
+    .slider__indicator--left {
+      -webkit-transition: left .3s cubic-bezier(.51, .92, .24, 1.15), right .3s .1s cubic-bezier(.51, .92, .24, 1.15);
+      transition: left .3s cubic-bezier(.51, .92, .24, 1.15), right .3s .1s cubic-bezier(.51, .92, .24, 1.15)
+    }
+    .slider__indicator--right {
+      -webkit-transition: left .3s .1s cubic-bezier(.51, .92, .24, 1.15), right .3s cubic-bezier(.51, .92, .24, 1.15);
+      transition: left .3s .1s cubic-bezier(.51, .92, .24, 1.15), right .3s cubic-bezier(.51, .92, .24, 1.15)
+    }
+    .slider {
+      width: var(--paper-slide-width, 100%);
+      height: var(--paper-slide-height, 600px)
+    } 
+    :host ::content paper-slide{
+      width: var(--paper-slide-width, 100%);
+      height: var(--paper-slide-height, 600px);
+      display: inline-block;
+      margin-right: -4px;
+    }
+  </style>
+  <template>
+    <div id="stylecontainer"></div>
+    <div id="container" class="slider" data-pos$="{{position}}">
+      <div class="slider__slides">
+        <content></content>
+      </div>
+      <div class="slider__dots">
+        <a href="#" class="slider__indicator"></a>
+        <template is="dom-repeat" items="{{_totalDots}}">
+          <a href="#" class="slider__dot" data-pos$="{{item}}"></a>
+        </template>
+      </div>
+    </div>
+  </template> </dom-module> <script>
+  ( function () {
+    Polymer({
+      is: 'l2t-paper-slider',
+      properties: {
+        /**
+        * Number for storing total
+        * number of slides
+        *
+        * @attribute total-slides
+        * @type Number
+        * @default 1
+        */
+        totalSlides: {
+          type: Number,
+          value: 1,
+          notify: true
+        },
+        /**
+        * Array for storing number
+        * leading up to totalSlides
+        *
+        * @attribute total-dots
+        * @type Array
+        * @default []
+        */
+        _totalDots: {
+          type: Array ,
+          value: [],
+          notify: true,
+          computed: 'createDots(totalSlides)'
+        },
+        /**
+        * Number for storing start
+        * position of slides
+        *
+        * @attribute position
+        * @type Number
+        * @default 0
+        */
+        position: {
+          type: Number,
+          value: 0,
+          reflectToAttribute: true,
+          notify: true
+        },
+      },
+      /**
+      * Create the nav
+      * dots 1 for each slide
+      *
+      */
+      createDots: function(t) {
+        var array = [], i;
+        for (i = 0; i < t; ++i) {
+          array.push(i);
+        };
+        return array;
+      },
+      /**
+      * Styles the slider
+      * does slide width and container width
+      *
+      */
+      setStyles: function() {
+        var deep = this.$.container.querySelector('.slider__slides'),
+            slides = deep.querySelectorAll('paper-slide'), i;
+        deep.style.width = this.totalSlides * 100 + "%";
+        for (i = 0; i < slides.length; ++i) {
+          slides[i].style.width = 100 / this.totalSlides + "%";
+        };
+      },
+      /**
+      * Styles the dots
+      * controls animation
+      *
+      */
+      insRules: function() {
+        var i;
+        var styleEl = document.createElement('style'), styleSheet;
+        this.$.stylecontainer.appendChild(styleEl);
+        styleSheet = styleEl.sheet;
+        for (i = 0; i < this.totalSlides; ++i) {
+          styleSheet.insertRule("."+this._scopeSelector+" .slider[data-pos='"+i+"'] .slider__indicator {left: "+(2*i)+"em;right: "+((2*(this.totalSlides-1))-(2*i))+"em;}", 0);
+          styleSheet.insertRule("."+this._scopeSelector+" .slider[data-pos='"+i+"'] .slider__slides {-webkit-transform: translateX(-"+(100/this.totalSlides)*i+"%);transform: translateX(-"+(100/this.totalSlides)*i+"%);}", 1);
+        };
+      },
+      /**
+      * Adds onclick listener
+      * To update the position
+      *
+      */
+      listenerInit: function() {
+        var sliderElem = this.$.container;
+        var dotElems = sliderElem.querySelectorAll('.slider__dot');
+        var indicatorElem = sliderElem.querySelector('.slider__indicator');
+        Array.prototype.forEach.call(dotElems, function (dotElem) {
+          dotElem.addEventListener('click', function (e) {
+            var currentPos = parseInt(sliderElem.getAttribute('data-pos'));
+            var newPos = parseInt(dotElem.getAttribute('data-pos'));
+            var newDirection = newPos > currentPos ? 'right' : 'left';
+            var currentDirection = newPos < currentPos ? 'right' : 'left';
+            indicatorElem.classList.remove('slider__indicator--' + currentDirection);
+            indicatorElem.classList.add('slider__indicator--' + newDirection);
+             sliderElem.setAttribute('data-pos', newPos);
+          });
+        });
+      },
+      /**
+      * Starting the scripts
+      *
+      */
+      attached: function() {
+        this.setStyles();
+        this.insRules();
+        this.listenerInit();
+      }
+    });
+  })();
+</script>
