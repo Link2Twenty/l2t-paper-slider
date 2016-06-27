@@ -1,4 +1,41 @@
-<link rel="import" href="../polymer/polymer.html"> <dom-module id="l2t-paper-slider">
+<link rel="import" href="../polymer/polymer.html"> 
+
+<!--
+  Polymer element for displaying slides in a carousel.
+
+  ### Examples
+  Each slide must be within a paper-slide tag, but other than that you have complete control.
+
+      <l2t-paper-slider total-slides="4">
+        <paper-slide>#1</paper-slide>
+        <paper-slide>#2</paper-slide>
+        <paper-slide>#3</paper-slide>
+        <paper-slide>#4</paper-slide>
+      </l2t-paper-slider>
+      
+  You can set a different default start position, the first start postion is 0 (as opposed to 1)
+      
+      <l2t-paper-slider total-slides="2" position="1">
+        <paper-slide>#1</paper-slide>
+        <paper-slide>#2</paper-slide>
+      </l2t-paper-slider>
+
+  ### Styling
+    
+The following custom properties are available for styling:
+
+Custom property | Description | Default
+----------------|-------------|----------
+`--paper-slide-dot` | Color of unselected Nav Dot. | `rgba(255, 255, 255, .5)`
+`--paper-slide-dot-selected` | Color of selected Nav Dot. | `#FFF`
+`--paper-slide-width` | Width of slide container. | `100%`
+`--paper-slide-height` | Height of slide container. | `600px`
+
+  @element l2t-paper-slider
+  @demo demo/index.html
+-->
+
+<dom-module id="l2t-paper-slider">
   <style>
     .slider {
       position: relative;
