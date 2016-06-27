@@ -1,0 +1,79 @@
+<html>
+  <head>
+    <title>l2t-paper-slider</title>
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#003366">
+    <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+    <link rel="import" href="../l2t-paper-slider.html">
+    <style is="custom-style">
+      .custom {
+        --paper-slide-width: 700px;
+        --paper-slide-height: 200px;
+        --paper-slide-dot: rgba(0, 0, 0, 0.5);
+        --paper-slide-dot-selected: rgba(0, 0, 0, 0.8);
+      }
+    </style>
+    <style>
+      body {
+        margin: 0;
+      }
+      .container {
+        width: 700px;
+        height: 200px;
+        margin: 20px auto;
+        border: 1px solid rgba(0, 0, 0, 0.5);
+      }
+      .paper-slide-1 {
+        background: #2196F3;
+        text-align: center;
+        vertical-align: middle;
+        line-height: 600px;
+        color: white;
+        font-size: 64px;
+        font-weight: bolder;
+      }
+      .paper-slide-2 {
+        background: #F44336;
+        text-align: center;
+        vertical-align: middle;
+        line-height: 600px;
+        color: white;
+        font-size: 64px;
+        font-weight: bolder;
+      }
+      .paper-slide-3 {
+        background:#795548;
+        text-align: center;
+        vertical-align: middle;
+        line-height: 600px;
+        color: white;
+        font-size: 64px;
+        font-weight: bolder;
+      }
+      .paper-slide-4 {
+        background:#009688;
+        text-align: center;
+        vertical-align: middle;
+        line-height: 600px;
+        color: white;
+        font-size: 64px;
+        font-weight: bolder;
+      }
+    </style>
+	</head>
+	  
+<body>
+  <l2t-paper-slider total-slides="4" position="0">
+    <paper-slide class="paper-slide-1">#1</paper-slide>
+    <paper-slide class="paper-slide-2">#2</paper-slide>
+    <paper-slide class="paper-slide-3">#3</paper-slide>
+    <paper-slide class="paper-slide-4">#4</paper-slide>
+  </l2t-paper-slider>
+  <div class="container">
+    <l2t-paper-slider class="custom" total-slides="3" position="0">
+      <paper-slide style="background-image: url('http://sketchapp.rocks/wp-content/uploads/2016/02/minimalist-ecommerce-icons-700x200.jpg');"></paper-slide>
+      <paper-slide style="background-image: url('http://cliqueimg.com/posts/186288/stressed-tk-foods-you-should-not-be-eating-1685836-1457146074.gif');"></paper-slide>
+      <paper-slide style="background-image: url('http://2.bp.blogspot.com/-ZGg5fvxXcHQ/Uy4Dqwecj3I/AAAAAAAAEVM/n1OY0TMu5Ws/s1600/Etsy.jpg');"</paper-slide>
+    </l2t-paper-slider>
+  </div> </body>
+</html>
