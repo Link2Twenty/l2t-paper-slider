@@ -1,6 +1,7 @@
 # < l2t-paper-slider >
 
 Polymer element for displaying slides in a carousel.
+Have a quick look at the [Component page](http://link2twenty.github.io/l2t-paper-slider) 
 
 ## Examples
 
