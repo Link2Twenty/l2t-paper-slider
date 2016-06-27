@@ -1,0 +1,21 @@
+{
+  "name": "l2t-paper-slider",
+  "homepage": "https://github.com/Link2Twenty/l2t-paper-slider",
+  "authors": [
+    "Andrew Bone <AndrewB05@gmail.com>"
+  ],
+  "description": "Polymer element for displaying slides in a carousel",
+  "main": "l2t-paper-slider.html",
+  "keywords": [
+    "Polymer",
+    "web-components"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
