@@ -1,5 +1,4 @@
-<link rel="import" href="../polymer/polymer.html"> <dom-module 
-id="l2t-paper-slider">
+<link rel="import" href="../polymer/polymer.html"> <dom-module id="l2t-paper-slider">
   <style>
     .slider {
       position: relative;
