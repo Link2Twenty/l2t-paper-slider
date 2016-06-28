@@ -58,7 +58,7 @@ The following custom properties are available for styling:
 | position | Number for storing start position of slides | Number | 0 |
 required*
 
-### Hidden
+### Private
 
 | Attribute Name | Functionality | Type | Default |
 |----------------|-------------|-------------|-------------|
@@ -73,7 +73,7 @@ required*
 | moveNext() | Method for moving to the next slide or back to the first slide |
 | movePrev() | Method for moving to the previous slide or to the last slide |
 
-### Hidden
+### Private
 
 | Method Name | Action |
 |----------------|-------------|
