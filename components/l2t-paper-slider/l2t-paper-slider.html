@@ -12,9 +12,17 @@
         <paper-slide>#4</paper-slide>
       </l2t-paper-slider>
       
+  There is also auto progression and slide duration for how long it should remain on one slide
+  
+      <l2t-paper-slider auto-progress slide-duration="2" total-slides="3">
+        <paper-slide>#1</paper-slide>
+        <paper-slide>#2</paper-slide>
+        <paper-slide>#3</paper-slide>
+      </l2t-paper-slider>
+      
   You can set a different default start position, the first start postion is 0 (as opposed to 1)
       
-      <l2t-paper-slider total-slides="2" position="1">
+      <l2t-paper-slider position="1" total-slides="2">
         <paper-slide>#1</paper-slide>
         <paper-slide>#2</paper-slide>
       </l2t-paper-slider>
@@ -71,7 +79,7 @@ Custom property | Description | Default
       height: 1em;
       background: var(--paper-slide-dot, rgba(255, 255, 255, .5));
       border-radius: 100px;
-      cursor:pointer;
+      cursor: pointer
     }
     .slider__indicator {
       position: absolute;
@@ -89,7 +97,7 @@ Custom property | Description | Default
     .slider {
       width: var(--paper-slide-width, 100%);
       height: var(--paper-slide-height, 600px)
-    } 
+    }
     :host ::content paper-slide{
       width: var(--paper-slide-width, 100%);
       height: var(--paper-slide-height, 600px);
@@ -129,20 +137,6 @@ Custom property | Description | Default
           notify: true
         },
         /**
-        * Array for storing number
-        * leading up to totalSlides
-        *
-        * @attribute total-dots
-        * @type Array
-        * @default []
-        */
-        _totalDots: {
-          type: Array ,
-          value: [],
-          notify: true,
-          computed: '_createDots(totalSlides)'
-        },
-        /**
         * Number for storing start
         * position of slides
         *
@@ -155,6 +149,48 @@ Custom property | Description | Default
           value: 0,
           reflectToAttribute: true,
           notify: true
+        },
+        /**
+        * Boolean value to
+        * state if slides should
+        * auto proceed
+        *
+        * @attribute auto-progress
+        * @type Boolean
+        * @default false
+        */
+        autoProgress: {
+          type: Boolean,
+          value: false,
+          notify: true
+        },
+        /**
+        * Number of seconds
+        * each slide should
+        * remain for
+        *
+        * @attribute slide-duration
+        * @type Number
+        * @default 5
+        */
+        slideDuration: {
+          type: Number,
+          value: 5,
+          notify: true
+        },
+        /**
+        * Array for storing number
+        * leading up to totalSlides
+        *
+        * @attribute _totalDots
+        * @type Array
+        * @default []
+        */
+        _totalDots: {
+          type: Array ,
+          value: [],
+          notify: true,
+          computed: '_createDots(totalSlides)'
         },
       },
       /**
@@ -239,6 +275,26 @@ Custom property | Description | Default
         this._moveInd(nextPos);
       },
       /**
+      * Method for moving
+      * automatically ever
+      * slideDuration seconds
+      *
+      */
+      _autoProceed: function() {
+        this$ = this;
+        var autoProceed = setInterval(function() {
+          this$.moveNext();
+        }, (this$.slideDuration * 1000));
+        this.$.container.addEventListener("mouseover", function() {
+          clearInterval(autoProceed);
+        });
+        this.$.container.addEventListener("mouseout", function() {
+          autoProceed = setInterval(function() {
+            this$.moveNext();
+          }, (this$.slideDuration * 1000));
+        });
+      },
+      /**
       * Adds onclick listener
       * To update the position
       *
@@ -260,6 +316,7 @@ Custom property | Description | Default
         this._setStyles();
         this._insRules();
         this._moveManual();
+        this.autoProgress == true ? this._autoProceed() : false;
       }
     });
   })();

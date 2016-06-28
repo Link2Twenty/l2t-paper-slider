@@ -1,6 +1,6 @@
 {
   "name": "l2t-paper-slider",
-  "version": "1.0.7",
+  "version": "1.0.9",
   "description": "Polymer element for displaying slides in a carousel",
   "homepage": "https://github.com/Link2Twenty/l2t-paper-slider",
   "authors": [
@@ -38,11 +38,11 @@
     "web-component-tester": "^4.0.0",
     "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
   },
-  "_release": "1.0.7",
+  "_release": "1.0.9",
   "_resolution": {
     "type": "version",
-    "tag": "v1.0.7",
-    "commit": "53f8059b9af0aee7c0decd35536a750082eee6d1"
+    "tag": "v1.0.9",
+    "commit": "f4b7e7ab14d627f4618d300865f07173a59f05c0"
   },
   "_source": "https://github.com/Link2Twenty/l2t-paper-slider.git",
   "_target": "*",

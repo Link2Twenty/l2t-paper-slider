@@ -3,9 +3,7 @@
 Polymer element for displaying slides in a carousel. 
 Have a quick look at the [Component page](http://link2twenty.github.io/l2t-paper-slider) 
 
-![Screenshot](https://media.giphy.com/media/l41YxYMasVcsTldx6/giphy.gif)
-
-These images aren't mind I just found them on google when looking for ones the right size.
+![Screenshot](https://media.giphy.com/media/3o72Fh8f8VwsTrvSGA/giphy.gif)
 
 ## Install with bower
 
@@ -55,6 +53,8 @@ The following custom properties are available for styling:
 | Attribute Name | Functionality | Type | Default |
 |----------------|-------------|-------------|-------------|
 | totalSlides* | Number for storing total number of slides | Number | 1 |
+| autoProgress | Boolean value to state if slides should auto proceed | Boolean | false |
+| slideDuration | Number of seconds each slide should remain for | Number | 5 |
 | position | Number for storing start position of slides | Number | 0 |
 required*
 
@@ -77,6 +77,7 @@ required*
 
 | Method Name | Action |
 |----------------|-------------|
+| _autoProceed() | Method for moving automatically ever slideDuration seconds |
 | _createDots(t) | Create the nav dots 1 for each slide | alert("You need to set the action attribute") |
 | _insRules() | Styles the dots controls animation |
 | _listenerInit() | Adds onclick listener To update the position |
