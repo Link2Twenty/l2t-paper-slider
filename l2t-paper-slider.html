@@ -70,7 +70,8 @@ Custom property | Description | Default
       width: 1em;
       height: 1em;
       background: var(--paper-slide-dot, rgba(255, 255, 255, .5));
-      border-radius: 100px
+      border-radius: 100px;
+      cursor:pointer;
     }
     .slider__indicator {
       position: absolute;
@@ -103,9 +104,9 @@ Custom property | Description | Default
         <content></content>
       </div>
       <div class="slider__dots">
-        <a href="#" class="slider__indicator"></a>
+        <span class="slider__indicator"></span>
         <template is="dom-repeat" items="{{_totalDots}}">
-          <a href="#" class="slider__dot" data-pos$="{{item}}"></a>
+          <span class="slider__dot" data-pos$="{{item}}"></span>
         </template>
       </div>
     </div>
@@ -139,7 +140,7 @@ Custom property | Description | Default
           type: Array ,
           value: [],
           notify: true,
-          computed: 'createDots(totalSlides)'
+          computed: '_createDots(totalSlides)'
         },
         /**
         * Number for storing start
@@ -161,7 +162,7 @@ Custom property | Description | Default
       * dots 1 for each slide
       *
       */
-      createDots: function(t) {
+      _createDots: function(t) {
         var array = [], i;
         for (i = 0; i < t; ++i) {
           array.push(i);
@@ -173,7 +174,7 @@ Custom property | Description | Default
       * does slide width and container width
       *
       */
-      setStyles: function() {
+      _setStyles: function() {
         var deep = this.$.container.querySelector('.slider__slides'),
             slides = deep.querySelectorAll('paper-slide'), i;
         deep.style.width = this.totalSlides * 100 + "%";
@@ -186,9 +187,8 @@ Custom property | Description | Default
       * controls animation
       *
       */
-      insRules: function() {
-        var i;
-        var styleEl = document.createElement('style'), styleSheet;
+      _insRules: function() {
+        var styleEl = document.createElement('style'), styleSheet, i;
         this.$.stylecontainer.appendChild(styleEl);
         styleSheet = styleEl.sheet;
         for (i = 0; i < this.totalSlides; ++i) {
@@ -197,23 +197,58 @@ Custom property | Description | Default
         };
       },
       /**
+      * Method to initiate
+      * and animate move
+      *
+      */
+      _moveInd: function(dotElem) {
+        var sliderElem = this.$.container,
+            indicatorElem = sliderElem.querySelector('.slider__indicator'),
+            currentPos = parseInt(sliderElem.getAttribute('data-pos')),
+            newPos = parseInt(dotElem.getAttribute('data-pos')),
+            newDirection = newPos > currentPos ? 'right' : 'left',
+            currentDirection = newPos < currentPos ? 'right' : 'left';
+        indicatorElem.classList.remove('slider__indicator--' + currentDirection);
+        indicatorElem.classList.add('slider__indicator--' + newDirection);
+        sliderElem.setAttribute('data-pos', newPos);
+      },
+      /**
+      * Method for moving
+      * to the next slide or back
+      * to the first slide
+      *
+      */
+      moveNext: function() {
+        var sliderElem = this.$.container,
+            posSelector = sliderElem.querySelectorAll('.slider__dot'),
+            currentPos = parseInt(sliderElem.getAttribute('data-pos')),
+            nextPos = currentPos < (this.totalSlides - 1) ? posSelector[(currentPos+1)] : posSelector[0];
+        this._moveInd(nextPos);
+      },
+      /**
+      * Method for moving
+      * to the previous slide or
+      * to the last slide
+      *
+      */
+      movePrev: function() {
+        var sliderElem = this.$.container,
+            posSelector = sliderElem.querySelectorAll('.slider__dot'),
+            currentPos = parseInt(sliderElem.getAttribute('data-pos')),
+            nextPos = currentPos > 0 ? posSelector[(currentPos-1)] : posSelector[(this.totalSlides - 1)];
+        this._moveInd(nextPos);
+      },
+      /**
       * Adds onclick listener
       * To update the position
       *
       */
-      listenerInit: function() {
-        var sliderElem = this.$.container;
-        var dotElems = sliderElem.querySelectorAll('.slider__dot');
-        var indicatorElem = sliderElem.querySelector('.slider__indicator');
+      _moveManual: function() {
+        var this$ = this,
+            dotElems = this.$.container.querySelectorAll('.slider__dot');
         Array.prototype.forEach.call(dotElems, function (dotElem) {
           dotElem.addEventListener('click', function (e) {
-            var currentPos = parseInt(sliderElem.getAttribute('data-pos'));
-            var newPos = parseInt(dotElem.getAttribute('data-pos'));
-            var newDirection = newPos > currentPos ? 'right' : 'left';
-            var currentDirection = newPos < currentPos ? 'right' : 'left';
-            indicatorElem.classList.remove('slider__indicator--' + currentDirection);
-            indicatorElem.classList.add('slider__indicator--' + newDirection);
-             sliderElem.setAttribute('data-pos', newPos);
+            this$._moveInd(dotElem);
           });
         });
       },
@@ -222,9 +257,9 @@ Custom property | Description | Default
       *
       */
       attached: function() {
-        this.setStyles();
-        this.insRules();
-        this.listenerInit();
+        this._setStyles();
+        this._insRules();
+        this._moveManual();
       }
     });
   })();
