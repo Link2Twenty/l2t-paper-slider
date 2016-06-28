@@ -84,4 +84,4 @@ I couldn't find anything telling me how to do this online so I hope you find it 
 
 ## Credit
 
-I adapted this project from [Tobias Reich](http://codepen.io/electerious/) project [Material Slider Dots](http://codepen.io/electerious/pen/JXNEPr/). The code is mostly his, I just made it more dynamic for a polymer enviroment.
+I adapted this project from [Tobias Reich](http://codepen.io/electerious/)'s project [Material Slider Dots](http://codepen.io/electerious/pen/JXNEPr/). The code is mostly his, I just made it more dynamic for a polymer enviroment.
