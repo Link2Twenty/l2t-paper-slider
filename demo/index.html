@@ -11,7 +11,7 @@
       .custom {
         --paper-slide-width: 300px;
         --paper-slide-height: 300px;
-        --paper-slide-dot: rgba(120,144,156 ,1);
+        --paper-slide-dot: rgba(120,144,156 ,.8);
         --paper-slide-dot-selected: rgba(38,50,56 ,1);
       }
     </style>
@@ -77,19 +77,17 @@
       </template>
     </demo-snippet>
     <br><br>
-    <b>Example with button controls:</b><br><br>
-    <demo-snippet>
+    <b>Example with auto progression:</b><br><br>
+    <demo-snippet><b>Notes:</b> Slides pause on mouse over
       <template>
         <div class="container">
-          <l2t-paper-slider class="custom" total-slides="5" position="2">
+          <l2t-paper-slider auto-progress slide-duration="2" class="custom" total-slides="5">
             <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=C5CAE9&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
             <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=BBDEFB&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
             <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=DCEDC8&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
             <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=FFF9C4&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
             <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=FFCCBC&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
           </l2t-paper-slider>
-          <paper-button onclick="document.querySelector('.custom').movePrev();">Previous</paper-button>
-          <paper-button onclick="document.querySelector('.custom').moveNext();">Next</paper-button>
         </div>
       </template>
     </demo-snippet>
@@ -99,7 +97,36 @@
           .custom {
             --paper-slide-width: 300px;
             --paper-slide-height: 300px;
-            --paper-slide-dot: rgba(120,144,156 ,1);
+            --paper-slide-dot: rgba(120,144,156 ,.8);
+            --paper-slide-dot-selected: rgba(38,50,56 ,1);
+          }
+        </style>
+      </template>
+    </demo-snippet>
+    <br><br>
+    <b>Example with button controls:</b><br><br>
+    <demo-snippet>
+      <template>
+        <div class="container">
+          <l2t-paper-slider class="custom moveControl" total-slides="5" position="2">
+            <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=C5CAE9&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
+            <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=BBDEFB&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
+            <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=DCEDC8&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
+            <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=FFF9C4&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
+            <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=FFCCBC&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
+          </l2t-paper-slider>
+          <paper-button onclick="document.querySelector('.moveControl').movePrev();">Previous</paper-button>
+          <paper-button onclick="document.querySelector('.moveControl').moveNext();">Next</paper-button>
+        </div>
+      </template>
+    </demo-snippet>
+    <demo-snippet><b>Styling:</b> (This needs to be in the head section)
+      <template>
+        <style is="custom-style">
+          .custom {
+            --paper-slide-width: 300px;
+            --paper-slide-height: 300px;
+            --paper-slide-dot: rgba(120,144,156 ,.8);
             --paper-slide-dot-selected: rgba(38,50,56 ,1);
           }
         </style>
