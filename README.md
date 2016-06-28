@@ -7,6 +7,14 @@ Have a quick look at the [Component page](http://link2twenty.github.io/l2t-paper
 
 These images aren't mind I just found them on google when looking for ones the right size.
 
+## Install with bower
+
+First you need bower, [see their site](http://bower.io/) for details 
+
+```
+bower install --save l2t-paper-slider
+```
+
 ## Examples
 
 Each slide must be within a paper-slide tag, but other than that you have complete control.
