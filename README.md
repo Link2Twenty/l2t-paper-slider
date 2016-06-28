@@ -5,8 +5,6 @@ Have a quick look at the [Component page](http://link2twenty.github.io/l2t-paper
 
 ![Screenshot](https://media.giphy.com/media/3o72Fh8f8VwsTrvSGA/giphy.gif)
 
-These images aren't mind I just found them on google when looking for ones the right size.
-
 ## Install with bower
 
 First you need bower, [see their site](http://bower.io/) for details 
