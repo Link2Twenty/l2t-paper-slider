@@ -50,20 +50,37 @@ The following custom properties are available for styling:
 
 ## Attributes
 
-| Attribute Name | Functionality | Default |
-|----------------|-------------|-------------|
-| totalSlides* | Number for storing total number of slides | 1 |
-| position | Number for storing start position of slides | 0 |
+### Public
+
+| Attribute Name | Functionality | Type | Default |
+|----------------|-------------|-------------|-------------|
+| totalSlides* | Number for storing total number of slides | Number | 1 |
+| position | Number for storing start position of slides | Number | 0 |
 required*
+
+### Hidden
+
+| Attribute Name | Functionality | Type | Default |
+|----------------|-------------|-------------|-------------|
+| _totalDots | Array for storing number leading up to totalSlides | Array | [] |
 
 ## Methods
 
+### Public
+
 | Method Name | Action |
 |----------------|-------------|
-| createDots(t) | Create the nav dots 1 for each slide | alert("You need to set the action attribute") |
-| insRules() | Styles the dots controls animation |
-| listenerInit() | Adds onclick listener To update the position |
-| setStyles() | Styles the slider does slide width and container width |
+| moveNext() | Method for moving to the next slide or back to the first slide |
+| movePrev() | Method for moving to the previous slide or to the last slide |
+
+### Hidden
+
+| Method Name | Action |
+|----------------|-------------|
+| _createDots(t) | Create the nav dots 1 for each slide | alert("You need to set the action attribute") |
+| _insRules() | Styles the dots controls animation |
+| _listenerInit() | Adds onclick listener To update the position |
+| _setStyles() | Styles the slider does slide width and container width |
 
 ## Technical Notes
 
