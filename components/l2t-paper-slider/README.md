@@ -26,6 +26,16 @@ Each slide must be within a paper-slide tag, but other than that you have comple
   </l2t-paper-slider>
 ```
   
+There is also auto progression and slide duration for how long it should remain on one slide
+
+```html
+  <l2t-paper-slider auto-progress slide-duration="2" total-slides="3">
+    <paper-slide>#1</paper-slide>
+    <paper-slide>#2</paper-slide>
+    <paper-slide>#3</paper-slide>
+  </l2t-paper-slider>
+```
+  
 You can set a different default start position, the first start postion is 0 (as opposed to 1)
 
 ```html
@@ -55,6 +65,7 @@ The following custom properties are available for styling:
 | totalSlides* | Number for storing total number of slides | Number | 1 |
 | autoProgress | Boolean value to state if slides should auto proceed | Boolean | false |
 | slideDuration | Number of seconds each slide should remain for | Number | 5 |
+| hideNav | Boolean value to state if nav should should hidden | Boolean | false |
 | position | Number for storing start position of slides | Number | 0 |
 required*
 
@@ -72,6 +83,7 @@ required*
 |----------------|-------------|
 | moveNext() | Method for moving to the next slide or back to the first slide |
 | movePrev() | Method for moving to the previous slide or to the last slide |
+| movePos(slide) | Method for moving to a specific slide |
 
 ### Private
 
