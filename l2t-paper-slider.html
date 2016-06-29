@@ -111,7 +111,7 @@ Custom property | Description | Default
       <div class="slider__slides">
         <content></content>
       </div>
-      <div class="slider__dots">
+      <div hidden$="{{hideNav}}" class="slider__dots">
         <span class="slider__indicator"></span>
         <template is="dom-repeat" items="{{_totalDots}}">
           <span class="slider__dot" data-pos$="{{item}}"></span>
@@ -148,6 +148,20 @@ Custom property | Description | Default
           type: Number,
           value: 0,
           reflectToAttribute: true,
+          notify: true
+        },
+        /**
+        * Boolean value to
+        * state if nav should
+        * should hidden
+        *
+        * @attribute hide-nav
+        * @type Boolean
+        * @default false
+        */
+        hideNav: {
+          type: Boolean,
+          value: false,
           notify: true
         },
         /**
@@ -272,6 +286,15 @@ Custom property | Description | Default
             posSelector = sliderElem.querySelectorAll('.slider__dot'),
             currentPos = parseInt(sliderElem.getAttribute('data-pos')),
             nextPos = currentPos > 0 ? posSelector[(currentPos-1)] : posSelector[(this.totalSlides - 1)];
+        this._moveInd(nextPos);
+      },
+      /**
+      * Method for moving
+      * to a specific slide
+      *
+      */
+      movePos: function(slide) {
+        var nextPos = this.$.container.querySelectorAll('.slider__dot')[slide];
         this._moveInd(nextPos);
       },
       /**
