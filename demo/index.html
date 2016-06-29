@@ -8,7 +8,7 @@
     <link rel="import" href="../../paper-button/paper-button.html">
     <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
     <style is="custom-style">
-      .custom {
+      .custom, .moveControl, .exNav {
         --paper-slide-width: 300px;
         --paper-slide-height: 300px;
         --paper-slide-dot: rgba(120,144,156 ,.8);
@@ -26,7 +26,7 @@
         margin: 20px auto;
         border: 1px solid rgba(0, 0, 0, 0.5);
       }
-      .container paper-button:last-child {
+      .container paper-button.proceed:last-child {
         float: right;
       }
       .paper-slide-1,
@@ -65,10 +65,9 @@
     </style>
   </head>
   <body>
-    <b>Out of the box:</b><br><br>
-    <demo-snippet>
+    <demo-snippet><b>Out of the box:</b><br><br>
       <template>
-        <l2t-paper-slider total-slides="4" position="0">
+        <l2t-paper-slider total-slides="4">
           <paper-slide class="paper-slide-1">#1</paper-slide>
           <paper-slide class="paper-slide-2">#2</paper-slide>
           <paper-slide class="paper-slide-3">#3</paper-slide>
@@ -77,13 +76,38 @@
       </template>
     </demo-snippet>
     <br><br>
-    <b>Example with auto progression:</b><br><br>
-    <demo-snippet><b>Notes:</b> Slides pause on mouse over
+    <demo-snippet><b>Example with 'dots' Hidden and external navigation:</b><br><br>
       <template>
         <div class="container">
-          <l2t-paper-slider auto-progress slide-duration="2" class="custom" total-slides="5">
+          <l2t-paper-slider hide-nav class="exNav" total-slides="3">
             <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=C5CAE9&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
             <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=BBDEFB&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
+            <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=DCEDC8&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
+          </l2t-paper-slider>
+          <paper-button onclick="document.querySelector('.exNav').movePos(0)">1</paper-button>
+          <paper-button onclick="document.querySelector('.exNav').movePos(1)">2</paper-button>
+          <paper-button onclick="document.querySelector('.exNav').movePos(2)">3</paper-button>
+        </div>
+      </template>
+    </demo-snippet>
+    <demo-snippet><b>Styling:</b> (This needs to be in the head section)
+      <template>
+        <style is="custom-style">
+          .exNav {
+            --paper-slide-width: 300px;
+            --paper-slide-height: 300px;
+            --paper-slide-dot: rgba(120,144,156 ,.8);
+            --paper-slide-dot-selected: rgba(38,50,56 ,1);
+          }
+        </style>
+      </template>
+    </demo-snippet>
+    <br><br>
+    <demo-snippet><b>Example with auto progression:</b><br><br>
+    <b>Notes:</b> Slides pause on mouse over
+      <template>
+        <div class="container">
+          <l2t-paper-slider auto-progress slide-duration="2" class="custom" total-slides="3">
             <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=DCEDC8&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
             <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=FFF9C4&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
             <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=FFCCBC&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
@@ -104,26 +128,23 @@
       </template>
     </demo-snippet>
     <br><br>
-    <b>Example with button controls:</b><br><br>
-    <demo-snippet>
+    <demo-snippet><b>Example with button controls:</b><br><br>
       <template>
         <div class="container">
-          <l2t-paper-slider class="custom moveControl" total-slides="5" position="2">
+          <l2t-paper-slider class="moveControl" total-slides="3" position="1">
             <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=C5CAE9&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
-            <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=BBDEFB&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
-            <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=DCEDC8&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
             <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=FFF9C4&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
             <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=FFCCBC&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
           </l2t-paper-slider>
-          <paper-button onclick="document.querySelector('.moveControl').movePrev();">Previous</paper-button>
-          <paper-button onclick="document.querySelector('.moveControl').moveNext();">Next</paper-button>
+          <paper-button class="proceed" onclick="document.querySelector('.moveControl').movePrev();">Previous</paper-button>
+          <paper-button class="proceed" onclick="document.querySelector('.moveControl').moveNext();">Next</paper-button>
         </div>
       </template>
     </demo-snippet>
     <demo-snippet><b>Styling:</b> (This needs to be in the head section)
       <template>
         <style is="custom-style">
-          .custom {
+          .moveControl {
             --paper-slide-width: 300px;
             --paper-slide-height: 300px;
             --paper-slide-dot: rgba(120,144,156 ,.8);
