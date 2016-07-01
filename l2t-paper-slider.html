@@ -52,6 +52,7 @@ Custom property | Description | Default
     }
     .slider__slides {
       position: relative;
+      width: 100%;
       height: 100%;
       background: #FFCDD2;
       -webkit-transition: -webkit-transform .3s cubic-bezier(.51, .92, .24, 1);
@@ -70,6 +71,9 @@ Custom property | Description | Default
       left: 50%;
       -webkit-transform: translateX(-50%);
       transform: translateX(-50%)
+    }
+    *[hidden] {
+      display: none;
     }
     .slider__dot,
     .slider__indicator {
@@ -147,8 +151,9 @@ Custom property | Description | Default
         position: {
           type: Number,
           value: 0,
+          notify: true,
           reflectToAttribute: true,
-          notify: true
+          observer: '_animateCSS'
         },
         /**
         * Boolean value to
@@ -208,6 +213,25 @@ Custom property | Description | Default
         },
       },
       /**
+      * Method for styling
+      * and animating dots
+      */
+      _animateCSS: function() {
+        var i;
+        for (i = 0; i < this.totalSlides; ++i) {
+          var deep = this.$.container;
+          var indicatorSel = deep.querySelectorAll(".slider[data-pos='"+i+"'] .slider__indicator"), iS;
+          var slidesSel = deep.querySelectorAll(".slider[data-pos='"+i+"'] .slider__slides"), sS;
+          for(iS = 0; iS < indicatorSel.length; ++iS) {
+          indicatorSel[iS].style.left = (2*i)+"em";
+          indicatorSel[iS].style.right = ((2*(this.totalSlides-1))-(2*i))+"em";
+          }
+          for(sS = 0; sS < slidesSel.length; ++sS) {
+          slidesSel[sS].style.transform = "translateX(-"+(100*i)+"%)";
+          }
+        };
+      },
+      /**
       * Create the nav
       * dots 1 for each slide
       *
@@ -227,24 +251,7 @@ Custom property | Description | Default
       _setStyles: function() {
         var deep = this.$.container.querySelector('.slider__slides'),
             slides = deep.querySelectorAll('paper-slide'), i;
-        deep.style.width = this.totalSlides * 100 + "%";
-        for (i = 0; i < slides.length; ++i) {
-          slides[i].style.width = 100 / this.totalSlides + "%";
-        };
-      },
-      /**
-      * Styles the dots
-      * controls animation
-      *
-      */
-      _insRules: function() {
-        var styleEl = document.createElement('style'), styleSheet, i;
-        this.$.stylecontainer.appendChild(styleEl);
-        styleSheet = styleEl.sheet;
-        for (i = 0; i < this.totalSlides; ++i) {
-          styleSheet.insertRule("."+this._scopeSelector+" .slider[data-pos='"+i+"'] .slider__indicator {left: "+(2*i)+"em;right: "+((2*(this.totalSlides-1))-(2*i))+"em;}", 0);
-          styleSheet.insertRule("."+this._scopeSelector+" .slider[data-pos='"+i+"'] .slider__slides {-webkit-transform: translateX(-"+(100/this.totalSlides)*i+"%);transform: translateX(-"+(100/this.totalSlides)*i+"%);}", 1);
-        };
+        deep.style.width =  100 + "%";
       },
       /**
       * Method to initiate
@@ -260,7 +267,7 @@ Custom property | Description | Default
             currentDirection = newPos < currentPos ? 'right' : 'left';
         indicatorElem.classList.remove('slider__indicator--' + currentDirection);
         indicatorElem.classList.add('slider__indicator--' + newDirection);
-        sliderElem.setAttribute('data-pos', newPos);
+        this.position = newPos;
       },
       /**
       * Method for moving
@@ -269,11 +276,9 @@ Custom property | Description | Default
       *
       */
       moveNext: function() {
-        var sliderElem = this.$.container,
-            posSelector = sliderElem.querySelectorAll('.slider__dot'),
-            currentPos = parseInt(sliderElem.getAttribute('data-pos')),
-            nextPos = currentPos < (this.totalSlides - 1) ? posSelector[(currentPos+1)] : posSelector[0];
-        this._moveInd(nextPos);
+        var currentPos = parseInt(this.$.container.getAttribute('data-pos')),
+            nextPos = currentPos < (this.totalSlides - 1) ? (currentPos+1) : 0;
+        this.movePos(nextPos);
       },
       /**
       * Method for moving
@@ -282,11 +287,9 @@ Custom property | Description | Default
       *
       */
       movePrev: function() {
-        var sliderElem = this.$.container,
-            posSelector = sliderElem.querySelectorAll('.slider__dot'),
-            currentPos = parseInt(sliderElem.getAttribute('data-pos')),
-            nextPos = currentPos > 0 ? posSelector[(currentPos-1)] : posSelector[(this.totalSlides - 1)];
-        this._moveInd(nextPos);
+        var currentPos = parseInt(this.$.container.getAttribute('data-pos')),
+            nextPos = currentPos > 0 ? (currentPos-1) : (this.totalSlides - 1);
+        this.movePos(nextPos);
       },
       /**
       * Method for moving
@@ -323,24 +326,25 @@ Custom property | Description | Default
       *
       */
       _moveManual: function() {
-        var this$ = this,
-            dotElems = this.$.container.querySelectorAll('.slider__dot');
-        Array.prototype.forEach.call(dotElems, function (dotElem) {
-          dotElem.addEventListener('click', function (e) {
-            this$._moveInd(dotElem);
+        var this$ = this;
+        var dotElems = this.$.container.querySelectorAll('.slider__dot'), i;
+        for (i = 0; i < dotElems.length; ++i) {
+          dotElems[i].addEventListener('click', function(e) {
+            this$.movePos(e.target.getAttribute('data-pos'));
           });
-        });
+        };
       },
       /**
       * Starting the scripts
       *
       */
       attached: function() {
+        var this$ = this;
         this._setStyles();
-        this._insRules();
-        this._moveManual();
+        // Strange hack, but it works.
+        setTimeout(function(){this$._moveManual();}, 0);
         this.autoProgress == true ? this._autoProceed() : false;
-      }
+      },
     });
   })();
 </script>
