@@ -4,6 +4,13 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=no">
     <meta name="theme-color" content="#003366">
     <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
+    <script>
+      /* this script must run before Polymer is imported */
+      window.Polymer = {
+        dom: 'shady',
+        lazyRegister: true
+      };
+    </script>
     <link rel="import" href="../l2t-paper-slider.html">
     <link rel="import" href="../../paper-button/paper-button.html">
     <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
@@ -96,8 +103,6 @@
           .exNav {
             --paper-slide-width: 300px;
             --paper-slide-height: 300px;
-            --paper-slide-dot: rgba(120,144,156 ,.8);
-            --paper-slide-dot-selected: rgba(38,50,56 ,1);
           }
         </style>
       </template>
@@ -107,8 +112,7 @@
     <b>Notes:</b> Slides pause on mouse over
       <template>
         <div class="container">
-          <l2t-paper-slider auto-progress slide-duration="2" class="custom" total-slides="3">
-            <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=DCEDC8&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
+          <l2t-paper-slider auto-progress slide-duration="2" class="custom" total-slides="2">
             <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=FFF9C4&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
             <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=FFCCBC&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
           </l2t-paper-slider>
@@ -128,12 +132,13 @@
       </template>
     </demo-snippet>
     <br><br>
-    <demo-snippet><b>Example with button controls:</b><br><br>
+    <demo-snippet><b>Example with button controls and position tag:</b><br><br>
       <template>
         <div class="container">
-          <l2t-paper-slider class="moveControl" total-slides="3" position="1">
+          <l2t-paper-slider class="moveControl" total-slides="4" position="2">
             <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=C5CAE9&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
             <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=FFF9C4&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
+            <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=DCEDC8&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
             <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=FFCCBC&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
           </l2t-paper-slider>
           <paper-button class="proceed" onclick="document.querySelector('.moveControl').movePrev();">Previous</paper-button>
