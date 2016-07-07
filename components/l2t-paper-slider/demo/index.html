@@ -36,28 +36,31 @@
       .container paper-button.proceed:last-child {
         float: right;
       }
-      .paper-slide-1,
-      .paper-slide-2,
-      .paper-slide-3,
-      .paper-slide-4 {
+      .demo-style {
         text-align: center;
         vertical-align: middle;
         line-height: 600px;
         color: #fff;
-        font-size: 64px;
+        font-size: 64px !important;
         font-weight: bolder
       }
-      .paper-slide-1 {
+      .paper-slide-blue {
         background: #2196F3
       }
-      .paper-slide-2 {
+      .paper-slide-red {
         background: #F44336
       }
-      .paper-slide-3 {
+      .paper-slide-brown {
         background: #795548
       }
-      .paper-slide-4 {
+      .paper-slide-green {
         background: #009688
+      }
+      .button-flex {
+        display: flex;
+      }
+      .button-flex > paper-button {
+        flex: 1;
       }
       demo-snippet {
         width: 768px;
@@ -75,10 +78,10 @@
     <demo-snippet><b>Out of the box:</b><br><br>
       <template>
         <l2t-paper-slider total-slides="4">
-          <paper-slide class="paper-slide-1">#1</paper-slide>
-          <paper-slide class="paper-slide-2">#2</paper-slide>
-          <paper-slide class="paper-slide-3">#3</paper-slide>
-          <paper-slide class="paper-slide-4">#4</paper-slide>
+          <paper-slide class="paper-slide-blue demo-style">#1</paper-slide>
+          <paper-slide class="paper-slide-red demo-style">#2</paper-slide>
+          <paper-slide class="paper-slide-brown demo-style">#3</paper-slide>
+          <paper-slide class="paper-slide-green demo-style">#4</paper-slide>
         </l2t-paper-slider>
       </template>
     </demo-snippet>
@@ -156,6 +159,52 @@
             --paper-slide-dot-selected: rgba(38,50,56 ,1);
           }
         </style>
+      </template>
+    </demo-snippet>
+    <br><br>
+    <demo-snippet><b>Updating your slides on the fly:</b><br><br>
+      <template>
+        <l2t-paper-slider class="reinit-demo" total-slides="2">
+          <paper-slide class="paper-slide-green demo-style">#1</paper-slide>
+          <paper-slide class="paper-slide-green demo-style">#2</paper-slide>
+        </l2t-paper-slider>
+        <div class="button-flex">
+          <paper-button onclick="addSlide()">Add</paper-button>
+          <paper-button onclick="remSlide()">Remove</paper-button>
+          <paper-button onclick="toggleNav('.reinit-demo')">Toggle nav</paper-button>
+        </div>
+      </template>
+    </demo-snippet>
+    <demo-snippet><b>Javascript</b> (To make the buttons tidier)
+      <template>
+        <script>
+          function addSlide() {
+            var selector = document.querySelector('.reinit-demo');
+            var node = document.createElement("paper-slide");
+            var textnode = document.createTextNode("#"+(selector.totalSlides + 1));
+            node.appendChild(textnode);
+            node.classList.add('paper-slide-green');
+            node.classList.add('demo-style');
+            selector.querySelector('#container').querySelector(".slider__slides").appendChild(node);
+            ++selector.totalSlides;
+          };
+          
+          function remSlide() {
+            var selector = document.querySelector('.reinit-demo');
+            var slides = selector.querySelector('#container').querySelector(".slider__slides");
+            var lastSlide = slides.lastElementChild;
+            slides.removeChild(lastSlide);
+            --selector.totalSlides;
+            if (selector.position >= selector.totalSlides) {
+              selector.movePos((selector.totalSlides -1));
+            }
+          };
+          
+          function toggleNav(id) {
+            var selector = document.querySelector(id);
+            selector.hideNav = !(selector.hideNav);
+          };
+        </script>
       </template>
     </demo-snippet>
   </body>

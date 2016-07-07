@@ -52,6 +52,7 @@ Custom property | Description | Default
     }
     .slider__slides {
       position: relative;
+      font-size: 0;
       width: 100%;
       height: 100%;
       background: #FFCDD2;
@@ -102,15 +103,16 @@ Custom property | Description | Default
       width: var(--paper-slide-width, 100%);
       height: var(--paper-slide-height, 600px)
     }
+    :host ::content * {
+      font-size: medium;
+    }
     :host ::content paper-slide{
       width: var(--paper-slide-width, 100%);
       height: var(--paper-slide-height, 600px);
       display: inline-block;
-      margin-right: -4px;
     }
   </style>
   <template>
-    <div id="stylecontainer"></div>
     <div id="container" class="slider" data-pos$="{{position}}">
       <div class="slider__slides">
         <content></content>
@@ -138,7 +140,9 @@ Custom property | Description | Default
         totalSlides: {
           type: Number,
           value: 1,
-          notify: true
+          notify: true,
+          reflectToAttribute: true,
+          observer: '_reInit'
         },
         /**
         * Number for storing start
@@ -167,7 +171,9 @@ Custom property | Description | Default
         hideNav: {
           type: Boolean,
           value: false,
-          notify: true
+          notify: true,
+          reflectToAttribute: true,
+          observer: '_reInit'
         },
         /**
         * Boolean value to
@@ -181,7 +187,7 @@ Custom property | Description | Default
         autoProgress: {
           type: Boolean,
           value: false,
-          notify: true
+          notify: true,
         },
         /**
         * Number of seconds
@@ -211,6 +217,18 @@ Custom property | Description | Default
           notify: true,
           computed: '_createDots(totalSlides)'
         },
+        /**
+        * Boolean value to
+        * indicate several inits
+        *
+        * @attribute _totalDots
+        * @type Boolean
+        * @default false
+        */
+        _firstInit: {
+          type: Boolean,
+          value: false
+        }
       },
       /**
       * Method for styling
@@ -328,11 +346,20 @@ Custom property | Description | Default
       _moveManual: function() {
         var this$ = this;
         var dotElems = this.$.container.querySelectorAll('.slider__dot'), i;
-        for (i = 0; i < dotElems.length; ++i) {
+        for (i = 0; i < this.totalSlides; ++i) {
           dotElems[i].addEventListener('click', function(e) {
             this$.movePos(e.target.getAttribute('data-pos'));
           });
         };
+      },
+      /**
+      * Method to reinitialise
+      * on totalSlides change.
+      *
+      */
+      _reInit: function() {
+        this._animateCSS();
+        this.attached();
       },
       /**
       * Starting the scripts
@@ -343,7 +370,10 @@ Custom property | Description | Default
         this._setStyles();
         // Strange hack, but it works.
         setTimeout(function(){this$._moveManual();}, 0);
-        this.autoProgress == true ? this._autoProceed() : false;
+        if (this._firstInit == false) {
+          this$.autoProgress == true ? this._autoProceed() : false;
+          setTimeout(function(){this$._firstInit = true;}, 0);
+        };
       },
     });
   })();
