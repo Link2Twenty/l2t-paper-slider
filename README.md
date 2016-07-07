@@ -74,6 +74,7 @@ required*
 | Attribute Name | Functionality | Type | Default |
 |----------------|-------------|-------------|-------------|
 | _totalDots | Array for storing number leading up to totalSlides | Array | [] |
+| _firstInit | Boolean value to indicate several inits | Boolean | false |
 
 ## Methods
 
@@ -94,6 +95,7 @@ required*
 | _animateCSS()) | Method for styling and animating dots |
 | _listenerInit() | Adds onclick listener To update the position |
 | _setStyles() | Styles the slider does slide width and container width |
+| _reInit() | Method to reinitialise on totalSlides change |
 
 ## Credit
 
