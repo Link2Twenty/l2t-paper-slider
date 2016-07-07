@@ -67,6 +67,7 @@ The following custom properties are available for styling:
 | slideDuration | Number of seconds each slide should remain for | Number | 5 |
 | hideNav | Boolean value to state if nav should should hidden | Boolean | false |
 | position | Number for storing start position of slides | Number | 0 |
+| disableSwipe | Boolean value to state if swipe shoud work | Boolean | false |
 required*
 
 ### Private
@@ -96,6 +97,7 @@ required*
 | _listenerInit() | Adds onclick listener To update the position |
 | _setStyles() | Styles the slider does slide width and container width |
 | _reInit() | Method to reinitialise on totalSlides change |
+| _swipeHandler(e) | Method for adding swipe event handler |
 
 ## Credit
 

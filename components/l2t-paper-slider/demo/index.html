@@ -15,7 +15,7 @@
     <link rel="import" href="../../paper-button/paper-button.html">
     <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
     <style is="custom-style">
-      .custom, .moveControl, .exNav {
+      .custom, .moveControl, .exNav, .swipeDis {
         --paper-slide-width: 300px;
         --paper-slide-height: 300px;
         --paper-slide-dot: rgba(120,144,156 ,.8);
@@ -83,6 +83,33 @@
           <paper-slide class="paper-slide-brown demo-style">#3</paper-slide>
           <paper-slide class="paper-slide-green demo-style">#4</paper-slide>
         </l2t-paper-slider>
+      </template>
+    </demo-snippet>
+    <br><br>
+    <demo-snippet><b>Example with Swipe disabled:</b><br><br>
+      <template>
+        <div class="container">
+          <l2t-paper-slider disable-swipe class="swipeDis" total-slides="6">
+            <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=C5CAE9&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
+            <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=FFF9C4&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
+            <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=DCEDC8&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
+            <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=FFCCBC&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
+            <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=FFF9C4&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
+            <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=DCEDC8&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
+          </l2t-paper-slider>
+        </div>
+      </template>
+    </demo-snippet>
+    <demo-snippet><b>Styling:</b> (This needs to be in the head section)
+      <template>
+        <style is="custom-style">
+          .swipeDis {
+            --paper-slide-width: 300px;
+            --paper-slide-height: 300px;
+            --paper-slide-dot: rgba(120,144,156 ,.8);
+            --paper-slide-dot-selected: rgba(38,50,56 ,1);
+          }
+        </style>
       </template>
     </demo-snippet>
     <br><br>
@@ -172,6 +199,7 @@
           <paper-button onclick="addSlide()">Add</paper-button>
           <paper-button onclick="remSlide()">Remove</paper-button>
           <paper-button onclick="toggleNav('.reinit-demo')">Toggle nav</paper-button>
+          <paper-button onclick="toggleSwipe('.reinit-demo')">Toggle swipe</paper-button>
         </div>
       </template>
     </demo-snippet>
@@ -203,6 +231,11 @@
           function toggleNav(id) {
             var selector = document.querySelector(id);
             selector.hideNav = !(selector.hideNav);
+          };
+          
+          function toggleSwipe(id) {
+            var selector = document.querySelector(id);
+            selector.disableSwipe = !(selector.disableSwipe);
           };
         </script>
       </template>
