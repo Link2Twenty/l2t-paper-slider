@@ -128,6 +128,9 @@ Custom property | Description | Default
   ( function () {
     Polymer({
       is: 'l2t-paper-slider',
+      listeners: {
+        'container.track': 'swipeHandler'
+      },
       properties: {
         /**
         * Number for storing total
@@ -204,6 +207,19 @@ Custom property | Description | Default
           notify: true
         },
         /**
+        * Boolean value to
+        * state if swipe shoud
+        * work
+        *
+        * @attribute disableSwipe
+        * @type Boolean
+        * @default false
+        */
+        disableSwipe: {
+          type: Boolean,
+          value: false
+        },
+        /**
         * Array for storing number
         * leading up to totalSlides
         *
@@ -228,6 +244,38 @@ Custom property | Description | Default
         _firstInit: {
           type: Boolean,
           value: false
+        }
+      },
+      /**
+      * Method for adding
+      * swipe event handler
+      */
+      swipeHandler: function(e) {
+        if (!(this.disableSwipe)) {
+          var deep = this.$.container;
+          switch(e.detail.state) {
+            case 'start':
+              this.startPosX = e.detail.x;
+            break;
+            case 'track':
+              var actualWidth = deep.offsetWidth;
+              var swipeTravel = this.startPosX - e.detail.x;
+              var percentMove = ((swipeTravel/actualWidth) * 100) <= 100 
+                                ? ((swipeTravel/actualWidth) * 100) + ((this.position) * 100) 
+                                : 100 + ((this.position) * 100);
+              this.perMov     = percentMove <= (this.totalSlides - 1) * 100 
+                                ? percentMove >= 0 
+                                ? percentMove 
+                                : 0 
+                                : (this.totalSlides - 1) * 100;
+              deep.querySelector(".slider__slides").style.transform = "translateX(-"+this.perMov+"%)";
+            break;
+            case 'end':
+              var newPos = Math.round(this.perMov / 100);
+              this.position == newPos ? deep.querySelector(".slider__slides").style.transform = "translateX(-"+this.position*100+"%)" : false;
+              this.movePos(newPos);
+            break;
+          }
         }
       },
       /**
