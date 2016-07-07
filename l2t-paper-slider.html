@@ -129,7 +129,7 @@ Custom property | Description | Default
     Polymer({
       is: 'l2t-paper-slider',
       listeners: {
-        'container.track': 'swipeHandler'
+        'container.track': '_swipeHandler'
       },
       properties: {
         /**
@@ -250,7 +250,7 @@ Custom property | Description | Default
       * Method for adding
       * swipe event handler
       */
-      swipeHandler: function(e) {
+      _swipeHandler: function(e) {
         if (!(this.disableSwipe)) {
           var deep = this.$.container;
           switch(e.detail.state) {
