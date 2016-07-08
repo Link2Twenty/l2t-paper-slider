@@ -294,7 +294,8 @@ Custom property | Description | Default
           }
         }
         // Horrible scroll hack (don't judge me).
-        switch(e.detail.state) {
+        if (e.detail.sourceEvent.type != "mousemove") {
+          switch(e.detail.state) {
             case 'start':
               this.startPosY = e.detail.y;
               this.scrollPos = document.body.scrollTop;
@@ -303,6 +304,7 @@ Custom property | Description | Default
               window.scrollTo(0, (this.scrollPos + (this.startPosY - e.detail.y)));
             break;
           }
+        }
       },
       /**
       * Method for styling
