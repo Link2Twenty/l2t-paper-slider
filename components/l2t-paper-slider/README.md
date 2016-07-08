@@ -68,6 +68,7 @@ The following custom properties are available for styling:
 | hideNav | Boolean value to state if nav should should hidden | Boolean | false |
 | position | Number for storing start position of slides | Number | 0 |
 | disableSwipe | Boolean value to state if swipe shoud work | Boolean | false |
+| sensitivity | String to storing high, low or default swipe sensitivity | String | 'default' |
 required*
 
 ### Private

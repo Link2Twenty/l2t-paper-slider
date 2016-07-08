@@ -234,6 +234,20 @@ Custom property | Description | Default
           computed: '_createDots(totalSlides)'
         },
         /**
+        * String to storing
+        * high, low or default
+        * swipe sensitivity
+        *
+        * @attribute sensitivity
+        * @type String
+        * @default 'default'
+        */
+        sensitivity: {
+          type: String,
+          value: 'default',
+          notify: true
+        },
+        /**
         * Boolean value to
         * indicate several inits
         *
@@ -271,12 +285,24 @@ Custom property | Description | Default
               deep.querySelector(".slider__slides").style.transform = "translateX(-"+this.perMov+"%)";
             break;
             case 'end':
-              var newPos = Math.round(this.perMov / 100);
+              var senNumber = this.sensitivity == "high" ? 0.25 : this.sensitivity == "low" ? -0.25 : 0;
+              var senDirection = this.perMov > (this.position * 100) ? 1 : -1;
+              var newPos = Math.round((this.perMov / 100) + (senNumber*senDirection));
               this.position == newPos ? deep.querySelector(".slider__slides").style.transform = "translateX(-"+this.position*100+"%)" : false;
               this.movePos(newPos);
             break;
           }
         }
+        // Horrible scroll hack (don't judge me).
+        switch(e.detail.state) {
+            case 'start':
+              this.startPosY = e.detail.y;
+              this.scrollPos = document.body.scrollTop;
+            break;
+            case 'track':
+              window.scrollTo(0, (this.scrollPos + (this.startPosY - e.detail.y)));
+            break;
+          }
       },
       /**
       * Method for styling
