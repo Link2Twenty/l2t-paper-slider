@@ -1,4 +1,5 @@
 <link rel="import" href="../polymer/polymer.html"> 
+<link rel="import" href="../iron-a11y-keys-behavior/iron-a11y-keys-behavior.html"> 
 
 <!--
   Polymer element for displaying slides in a carousel.
@@ -131,6 +132,12 @@ Custom property | Description | Default
       listeners: {
         'container.track': '_swipeHandler'
       },
+      behaviors: [
+        Polymer.IronA11yKeysBehavior
+      ],
+      hostAttributes: {
+        tabindex: 0
+      },
       properties: {
         /**
         * Number for storing total
@@ -260,6 +267,11 @@ Custom property | Description | Default
           value: false
         }
       },
+      keyBindings: {
+        'right': 'moveNext',
+        'left': 'movePrev',
+      },
+
       /**
       * Method for adding
       * swipe event handler
