@@ -84,8 +84,12 @@ Custom property | Description | Default
       width: 1em;
       height: 1em;
       background: var(--paper-slide-dot, rgba(255, 255, 255, .5));
-      border-radius: 100px;
+      border-radius: 50%;
       cursor: pointer
+    }
+    .slider__dot:focus {
+      outline: none;
+      box-shadow: 0 0 7px 1px var(--paper-slide-dot, rgba(255, 255, 255, .5));
     }
     .slider__indicator {
       position: absolute;
@@ -122,7 +126,7 @@ Custom property | Description | Default
       <div hidden$="{{hideNav}}" class="slider__dots">
         <span class="slider__indicator"></span>
         <template is="dom-repeat" items="{{_totalDots}}">
-          <span class="slider__dot" data-pos$="{{item}}"></span>
+          <span tabindex="0" class="slider__dot" data-pos$="{{item}}"></span>
         </template>
       </div>
     </div>
@@ -140,139 +144,265 @@ Custom property | Description | Default
         tabindex: 0
       },
       properties: {
-        /**
-        * Number for storing total
-        * number of slides
-        *
-        * @attribute total-slides
-        * @type Number
-        * @default 1
-        */
-        totalSlides: {
-          type: Number,
-          value: 1,
-          notify: true,
-          reflectToAttribute: true,
-          observer: '_reInit'
-        },
-        /**
-        * Number for storing start
-        * position of slides
-        *
-        * @attribute position
-        * @type Number
-        * @default 0
-        */
-        position: {
-          type: Number,
-          value: 0,
-          notify: true,
-          reflectToAttribute: true,
-          observer: '_animateCSS'
-        },
-        /**
-        * Boolean value to
-        * state if nav should
-        * should hidden
-        *
-        * @attribute hide-nav
-        * @type Boolean
-        * @default false
-        */
-        hideNav: {
-          type: Boolean,
-          value: false,
-          notify: true,
-          reflectToAttribute: true,
-          observer: '_reInit'
-        },
-        /**
-        * Boolean value to
-        * state if slides should
-        * auto proceed
-        *
-        * @attribute auto-progress
-        * @type Boolean
-        * @default false
-        */
-        autoProgress: {
-          type: Boolean,
-          value: false,
-          notify: true,
-        },
-        /**
-        * Number of seconds
-        * each slide should
-        * remain for
-        *
-        * @attribute slide-duration
-        * @type Number
-        * @default 5
-        */
-        slideDuration: {
-          type: Number,
-          value: 5,
-          notify: true
-        },
-        /**
-        * Boolean value to
-        * state if swipe shoud
-        * work
-        *
-        * @attribute disableSwipe
-        * @type Boolean
-        * @default false
-        */
-        disableSwipe: {
-          type: Boolean,
-          value: false
-        },
-        /**
-        * Array for storing number
-        * leading up to totalSlides
-        *
-        * @attribute _totalDots
-        * @type Array
-        * @default []
-        */
-        _totalDots: {
-          type: Array ,
-          value: [],
-          notify: true,
-          computed: '_createDots(totalSlides)'
-        },
-        /**
-        * String to storing
-        * high, low or default
-        * swipe sensitivity
-        *
-        * @attribute sensitivity
-        * @type String
-        * @default 'default'
-        */
-        sensitivity: {
-          type: String,
-          value: 'default',
-          notify: true
-        },
-        /**
-        * Boolean value to
-        * indicate several inits
-        *
-        * @attribute _totalDots
-        * @type Boolean
-        * @default false
-        */
-        _firstInit: {
-          type: Boolean,
-          value: false
-        }
+      
+      // Private //
+
+      /**
+      * Boolean value to
+      * indicate several inits
+      *
+      * @attribute _totalDots
+      * @type Boolean
+      * @default false
+      */
+      _firstInit: {
+        type: Boolean,
+        value: false
       },
+      /**
+      * Array for storing number
+      * leading up to totalSlides
+      *
+      * @attribute _totalDots
+      * @type Array
+      * @default []
+      */
+      _totalDots: {
+        type: Array ,
+        value: [],
+        notify: true,
+        computed: '_createDots(totalSlides)'
+      },
+
+      // Public //
+
+      /**
+      * Boolean value to
+      * state if slides should
+      * auto proceed
+      *
+      * @attribute auto-progress
+      * @type Boolean
+      * @default false
+      */
+      autoProgress: {
+        type: Boolean,
+        value: false,
+        notify: true,
+      },
+      /**
+      * Boolean value to
+      * state if swipe shoud
+      * work
+      *
+      * @attribute disableSwipe
+      * @type Boolean
+      * @default false
+      */
+      disableSwipe: {
+        type: Boolean,
+        value: false
+      },
+      /**
+      * Boolean value to
+      * state if nav should
+      * should hidden
+      *
+      * @attribute hide-nav
+      * @type Boolean
+      * @default false
+      */
+      hideNav: {
+        type: Boolean,
+        value: false,
+        notify: true,
+        reflectToAttribute: true,
+        observer: '_reInit'
+      },
+      /**
+      * Number for storing start
+      * position of slides
+      *
+      * @attribute position
+      * @type Number
+      * @default 0
+      */
+      position: {
+        type: Number,
+        value: 0,
+        notify: true,
+        reflectToAttribute: true,
+        observer: '_animateCSS'
+      },
+      /**
+      * String to storing
+      * high, low or default
+      * swipe sensitivity
+      *
+      * @attribute sensitivity
+      * @type String
+      * @default 'default'
+      */
+      sensitivity: {
+        type: String,
+        value: 'default',
+        notify: true
+      },
+      /**
+      * Number of seconds
+      * each slide should
+      * remain for
+      *
+      * @attribute slide-duration
+      * @type Number
+      * @default 5
+      */
+      slideDuration: {
+        type: Number,
+        value: 5,
+        notify: true
+      },
+      /**
+      * Number for storing total
+      * number of slides
+      *
+      * @attribute total-slides
+      * @type Number
+      * @default 1
+      */
+      totalSlides: {
+        type: Number,
+        value: 1,
+        notify: true,
+        reflectToAttribute: true,
+        observer: '_reInit'
+      },        
+      },
+      
+      // Key Bindings //
+      
       keyBindings: {
         'right': 'moveNext',
         'left': 'movePrev',
+        'space': '_spaceCatcher',
+        'enter': '_spaceCatcher',
       },
+      
+      // Private //
 
+      /**
+      * Method for styling
+      * and animating dots
+      */
+      _animateCSS: function() {
+        var i;
+        for (i = 0; i < this.totalSlides; ++i) {
+          var deep = this.$.container;
+          var indicatorSel = deep.querySelectorAll(".slider[data-pos='"+i+"'] .slider__indicator"), iS;
+          var slidesSel = deep.querySelectorAll(".slider[data-pos='"+i+"'] .slider__slides"), sS;
+          for(iS = 0; iS < indicatorSel.length; ++iS) {
+          indicatorSel[iS].style.left = (2*i)+"em";
+          indicatorSel[iS].style.right = ((2*(this.totalSlides-1))-(2*i))+"em";
+          }
+          for(sS = 0; sS < slidesSel.length; ++sS) {
+          slidesSel[sS].style.transform = "translateX(-"+(100*i)+"%)";
+          }
+        };
+      },
+      /**
+      * Method for moving
+      * automatically ever
+      * slideDuration seconds
+      *
+      */
+      _autoProceed: function() {
+        this$ = this;
+        var autoProceed = setInterval(function() {
+          this$.moveNext();
+        }, (this$.slideDuration * 1000));
+        this.$.container.addEventListener("mouseover", function() {
+          clearInterval(autoProceed);
+        });
+        this.$.container.addEventListener("mouseout", function() {
+          autoProceed = setInterval(function() {
+            this$.moveNext();
+          }, (this$.slideDuration * 1000));
+        });
+      },
+      /**
+      * Create the nav
+      * dots 1 for each slide
+      *
+      */
+      _createDots: function(t) {
+        var array = [], i;
+        for (i = 0; i < t; ++i) {
+          array.push(i);
+        };
+        return array;
+      },
+      /**
+      * Method to initiate
+      * and animate move
+      *
+      */
+      _moveInd: function(dotElem) {
+        var sliderElem = this.$.container,
+            indicatorElem = sliderElem.querySelector('.slider__indicator'),
+            currentPos = parseInt(sliderElem.getAttribute('data-pos')),
+            newPos = parseInt(dotElem.getAttribute('data-pos')),
+            newDirection = newPos > currentPos ? 'right' : 'left',
+            currentDirection = newPos < currentPos ? 'right' : 'left';
+        indicatorElem.classList.remove('slider__indicator--' + currentDirection);
+        indicatorElem.classList.add('slider__indicator--' + newDirection);
+        this.position = newPos;
+      },
+      /**
+      * Adds onclick listener
+      * To update the position
+      *
+      */
+      _moveManual: function() {
+        var this$ = this;
+        var dotElems = this.$.container.querySelectorAll('.slider__dot'), i;
+        for (i = 0; i < this.totalSlides; ++i) {
+          dotElems[i].addEventListener('click', function(e) {
+            this$.movePos(e.target.getAttribute('data-pos'));
+          });
+        };
+      },
+      /**
+      * Method to reinitialise
+      * on totalSlides change.
+      *
+      */
+      _reInit: function() {
+        this._animateCSS();
+        this.attached();
+      },
+      /**
+      * Styles the slider
+      * does slide width and container width
+      *
+      */
+      _setStyles: function() {
+        var deep = this.$.container.querySelector('.slider__slides'),
+            slides = deep.querySelectorAll('paper-slide'), i;
+        deep.style.width =  100 + "%";
+      },
+      /**
+      * Method for moving
+      * to the selected slide 
+      * on key press
+      *
+      */
+      _spaceCatcher: function(e) {
+        e.preventDefault();
+        var nextPos = document.activeElement.getAttribute('data-pos');
+        if (!nextPos)
+        return;
+        this.movePos(nextPos);
+      },
       /**
       * Method for adding
       * swipe event handler
@@ -319,63 +449,9 @@ Custom property | Description | Default
           }
         }
       },
-      /**
-      * Method for styling
-      * and animating dots
-      */
-      _animateCSS: function() {
-        var i;
-        for (i = 0; i < this.totalSlides; ++i) {
-          var deep = this.$.container;
-          var indicatorSel = deep.querySelectorAll(".slider[data-pos='"+i+"'] .slider__indicator"), iS;
-          var slidesSel = deep.querySelectorAll(".slider[data-pos='"+i+"'] .slider__slides"), sS;
-          for(iS = 0; iS < indicatorSel.length; ++iS) {
-          indicatorSel[iS].style.left = (2*i)+"em";
-          indicatorSel[iS].style.right = ((2*(this.totalSlides-1))-(2*i))+"em";
-          }
-          for(sS = 0; sS < slidesSel.length; ++sS) {
-          slidesSel[sS].style.transform = "translateX(-"+(100*i)+"%)";
-          }
-        };
-      },
-      /**
-      * Create the nav
-      * dots 1 for each slide
-      *
-      */
-      _createDots: function(t) {
-        var array = [], i;
-        for (i = 0; i < t; ++i) {
-          array.push(i);
-        };
-        return array;
-      },
-      /**
-      * Styles the slider
-      * does slide width and container width
-      *
-      */
-      _setStyles: function() {
-        var deep = this.$.container.querySelector('.slider__slides'),
-            slides = deep.querySelectorAll('paper-slide'), i;
-        deep.style.width =  100 + "%";
-      },
-      /**
-      * Method to initiate
-      * and animate move
-      *
-      */
-      _moveInd: function(dotElem) {
-        var sliderElem = this.$.container,
-            indicatorElem = sliderElem.querySelector('.slider__indicator'),
-            currentPos = parseInt(sliderElem.getAttribute('data-pos')),
-            newPos = parseInt(dotElem.getAttribute('data-pos')),
-            newDirection = newPos > currentPos ? 'right' : 'left',
-            currentDirection = newPos < currentPos ? 'right' : 'left';
-        indicatorElem.classList.remove('slider__indicator--' + currentDirection);
-        indicatorElem.classList.add('slider__indicator--' + newDirection);
-        this.position = newPos;
-      },
+
+      // Public //
+
       /**
       * Method for moving
       * to the next slide or back
@@ -389,17 +465,6 @@ Custom property | Description | Default
       },
       /**
       * Method for moving
-      * to the previous slide or
-      * to the last slide
-      *
-      */
-      movePrev: function() {
-        var currentPos = parseInt(this.$.container.getAttribute('data-pos')),
-            nextPos = currentPos > 0 ? (currentPos-1) : (this.totalSlides - 1);
-        this.movePos(nextPos);
-      },
-      /**
-      * Method for moving
       * to a specific slide
       *
       */
@@ -409,47 +474,18 @@ Custom property | Description | Default
       },
       /**
       * Method for moving
-      * automatically ever
-      * slideDuration seconds
+      * to the previous slide or
+      * to the last slide
       *
       */
-      _autoProceed: function() {
-        this$ = this;
-        var autoProceed = setInterval(function() {
-          this$.moveNext();
-        }, (this$.slideDuration * 1000));
-        this.$.container.addEventListener("mouseover", function() {
-          clearInterval(autoProceed);
-        });
-        this.$.container.addEventListener("mouseout", function() {
-          autoProceed = setInterval(function() {
-            this$.moveNext();
-          }, (this$.slideDuration * 1000));
-        });
+      movePrev: function() {
+        var currentPos = parseInt(this.$.container.getAttribute('data-pos')),
+            nextPos = currentPos > 0 ? (currentPos-1) : (this.totalSlides - 1);
+        this.movePos(nextPos);
       },
-      /**
-      * Adds onclick listener
-      * To update the position
-      *
-      */
-      _moveManual: function() {
-        var this$ = this;
-        var dotElems = this.$.container.querySelectorAll('.slider__dot'), i;
-        for (i = 0; i < this.totalSlides; ++i) {
-          dotElems[i].addEventListener('click', function(e) {
-            this$.movePos(e.target.getAttribute('data-pos'));
-          });
-        };
-      },
-      /**
-      * Method to reinitialise
-      * on totalSlides change.
-      *
-      */
-      _reInit: function() {
-        this._animateCSS();
-        this.attached();
-      },
+
+      // Init //
+
       /**
       * Starting the scripts
       *
