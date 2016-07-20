@@ -496,8 +496,10 @@ Custom property | Description | Default
         // Strange hack, but it works.
         setTimeout(function(){this$._moveManual();}, 0);
         if (this._firstInit == false) {
-          this$.autoProgress == true ? this._autoProceed() : false;
-          setTimeout(function(){this$._firstInit = true;}, 0);
+          this$.autoProgress == true 
+            ? setTimeout(function(){this$._autoProceed()}, 0) 
+            : false;
+          this$._firstInit = true;
         };
       },
     });
