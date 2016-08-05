@@ -1,6 +1,6 @@
 {
   "name": "iron-location",
-  "version": "0.8.6",
+  "version": "0.8.7",
   "description": "Bidirectional data binding into the page's URL.",
   "private": true,
   "authors": [
@@ -37,11 +37,11 @@
     "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0",
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.2.3"
   },
-  "_release": "0.8.6",
+  "_release": "0.8.7",
   "_resolution": {
     "type": "version",
-    "tag": "0.8.6",
-    "commit": "8f628b3477fcba70da47d75e521a8afe8f12e4f7"
+    "tag": "v0.8.7",
+    "commit": "fe833f488b0cf492f68cc113923b6a7aa90d115f"
   },
   "_source": "git://github.com/PolymerElements/iron-location.git",
   "_target": "^0.8.0",

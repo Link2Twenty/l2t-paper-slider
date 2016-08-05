@@ -37,6 +37,7 @@ Custom property | Description | Default
 `--paper-slide-dot-selected` | Color of selected Nav Dot. | `#FFF`
 `--paper-slide-width` | Width of slide container. | `100%`
 `--paper-slide-height` | Height of slide container. | `600px`
+`--paper-slide-dot-styles` | (Mixin) Custon styles for dots| NULL
 
   @element l2t-paper-slider
   @demo demo/index.html
@@ -80,20 +81,26 @@ Custom property | Description | Default
     .slider__dot,
     .slider__indicator {
       display: block;
-      margin: 0 .5em;
-      width: 1em;
-      height: 1em;
+      margin: 8px;
+      width: 16px;
+      height: 16px;
       background: var(--paper-slide-dot, rgba(255, 255, 255, .5));
       border-radius: 50%;
-      cursor: pointer
+      cursor: pointer;
+      @apply(--paper-slide-dot-styles);
     }
     .slider__dot:focus {
       outline: none;
       box-shadow: 0 0 7px 1px var(--paper-slide-dot, rgba(255, 255, 255, .5));
     }
     .slider__indicator {
+      -webkit-transition: opacity .5s .1s cubic-bezier(.51, .92, .24, 1.15);
+      transition: opacity .5s .1s cubic-bezier(.51, .92, .24, 1.15);
       position: absolute;
       background: var(--paper-slide-dot-selected, #FFF);
+      border-color: rgba(0,0,0,0);
+      background-clip: padding-box;
+      opacity: 0;
       width: auto
     }
     .slider__indicator--left {
@@ -145,147 +152,149 @@ Custom property | Description | Default
       },
       properties: {
       
-      // Private //
+        // Private //
 
-      /**
-      * Boolean value to
-      * indicate several inits
-      *
-      * @attribute _totalDots
-      * @type Boolean
-      * @default false
-      */
-      _firstInit: {
-        type: Boolean,
-        value: false
-      },
-      /**
-      * Array for storing number
-      * leading up to totalSlides
-      *
-      * @attribute _totalDots
-      * @type Array
-      * @default []
-      */
-      _totalDots: {
-        type: Array ,
-        value: [],
-        notify: true,
-        computed: '_createDots(totalSlides)'
-      },
+        /**
+        * Array for storing number
+        * leading up to totalSlides
+        *
+        * @attribute _totalDots
+        * @type Array
+        * @default []
+        */
+        _totalDots: {
+          type: Array ,
+          value: [],
+          notify: true,
+          computed: '_createDots(totalSlides)'
+        },
+        /**
+        * Object for storing
+        * all the styles of the
+        * dot elements
+        *
+        * @attribute _dotStyles
+        * @type Object
+        * @default NULL
+        */
+        _dotStyles: {
+          type: Object,
+          notify: true,
+          observer: '_animateCSS'
+        },
 
-      // Public //
+        // Public //
 
-      /**
-      * Boolean value to
-      * state if slides should
-      * auto proceed
-      *
-      * @attribute auto-progress
-      * @type Boolean
-      * @default false
-      */
-      autoProgress: {
-        type: Boolean,
-        value: false,
-        notify: true,
-      },
-      /**
-      * Boolean value to
-      * state if swipe shoud
-      * work
-      *
-      * @attribute disableSwipe
-      * @type Boolean
-      * @default false
-      */
-      disableSwipe: {
-        type: Boolean,
-        value: false
-      },
-      /**
-      * Boolean value to
-      * state if nav should
-      * should hidden
-      *
-      * @attribute hide-nav
-      * @type Boolean
-      * @default false
-      */
-      hideNav: {
-        type: Boolean,
-        value: false,
-        notify: true,
-        reflectToAttribute: true,
-        observer: '_reInit'
-      },
-      /**
-      * Number for storing start
-      * position of slides
-      *
-      * @attribute position
-      * @type Number
-      * @default 0
-      */
-      position: {
-        type: Number,
-        value: 0,
-        notify: true,
-        reflectToAttribute: true,
-        observer: '_animateCSS'
-      },
-      /**
-      * String to storing
-      * high, low or default
-      * swipe sensitivity
-      *
-      * @attribute sensitivity
-      * @type String
-      * @default 'default'
-      */
-      sensitivity: {
-        type: String,
-        value: 'default',
-        notify: true
-      },
-      /**
-      * Number of seconds
-      * each slide should
-      * remain for
-      *
-      * @attribute slide-duration
-      * @type Number
-      * @default 5
-      */
-      slideDuration: {
-        type: Number,
-        value: 5,
-        notify: true
-      },
-      /**
-      * Number for storing total
-      * number of slides
-      *
-      * @attribute total-slides
-      * @type Number
-      * @default 1
-      */
-      totalSlides: {
-        type: Number,
-        value: 1,
-        notify: true,
-        reflectToAttribute: true,
-        observer: '_reInit'
-      },        
+        /**
+        * Boolean value to
+        * state if slides should
+        * auto proceed
+        *
+        * @attribute auto-progress
+        * @type Boolean
+        * @default false
+        */
+        autoProgress: {
+          type: Boolean,
+          value: false,
+          notify: true,
+        },
+        /**
+        * Boolean value to
+        * state if swipe shoud
+        * work
+        *
+        * @attribute disableSwipe
+        * @type Boolean
+        * @default false
+        */
+        disableSwipe: {
+          type: Boolean,
+          value: false
+        },
+        /**
+        * Boolean value to
+        * state if nav should
+        * should hidden
+        *
+        * @attribute hide-nav
+        * @type Boolean
+        * @default false
+        */
+        hideNav: {
+          type: Boolean,
+          value: false,
+          notify: true,
+          reflectToAttribute: true,
+          observer: '_reInit'
+        },
+        /**
+        * Number for storing start
+        * position of slides
+        *
+        * @attribute position
+        * @type Number
+        * @default 0
+        */
+        position: {
+          type: Number,
+          value: 0,
+          notify: true,
+          reflectToAttribute: true,
+          observer: '_animateCSS'
+        },
+        /**
+        * String to storing
+        * high, low or default
+        * swipe sensitivity
+        *
+        * @attribute sensitivity
+        * @type String
+        * @default 'default'
+        */
+        sensitivity: {
+          type: String,
+          value: 'default',
+          notify: true
+        },
+        /**
+        * Number of seconds
+        * each slide should
+        * remain for
+        *
+        * @attribute slide-duration
+        * @type Number
+        * @default 5
+        */
+        slideDuration: {
+          type: Number,
+          value: 5,
+          notify: true
+        },
+        /**
+        * Number for storing total
+        * number of slides
+        *
+        * @attribute total-slides
+        * @type Number
+        * @default 1
+        */
+        totalSlides: {
+          type: Number,
+          value: 1,
+          notify: true,
+          reflectToAttribute: true,
+          observer: '_reInit'
+        },        
       },
       
       // Key Bindings //
       
       keyBindings: {
-        'right': 'moveNext',
-        'left': 'movePrev',
-        'space': '_spaceCatcher',
-        'enter': '_spaceCatcher',
+        'right' : '_keyRight',
+        'left'  : '_keyLeft',
+        'space' : '_spaceCatcher',
+        'enter' : '_spaceCatcher',
       },
       
       // Private //
@@ -295,19 +304,14 @@ Custom property | Description | Default
       * and animating dots
       */
       _animateCSS: function() {
-        var i;
-        for (i = 0; i < this.totalSlides; ++i) {
-          var deep = this.$.container;
-          var indicatorSel = deep.querySelectorAll(".slider[data-pos='"+i+"'] .slider__indicator"), iS;
-          var slidesSel = deep.querySelectorAll(".slider[data-pos='"+i+"'] .slider__slides"), sS;
-          for(iS = 0; iS < indicatorSel.length; ++iS) {
-          indicatorSel[iS].style.left = (2*i)+"em";
-          indicatorSel[iS].style.right = ((2*(this.totalSlides-1))-(2*i))+"em";
-          }
-          for(sS = 0; sS < slidesSel.length; ++sS) {
-          slidesSel[sS].style.transform = "translateX(-"+(100*i)+"%)";
-          }
-        };
+        var deep = this.$.container,
+            indSel = deep.querySelector(".slider__indicator");
+        if (this._dotStyles) {
+          deep.querySelector(".slider__slides").style.transform = "translateX(-" + 100 * this.position + "%)",
+          indSel.style.opacity = "1";
+          indSel.style.left   = "calc(((("+this._dotStyles.marginRight+" + "+this._dotStyles.marginLeft+") + ("+this._dotStyles.paddingRight+" + "+this._dotStyles.paddingLeft+") + "+this._dotStyles.width+") * "+this.position+") + "+this.position+" * ("+this._dotStyles.borderLeftWidth+" + "+this._dotStyles.borderRightWidth+"))";
+          indSel.style.right  = "calc("+((this.totalSlides - (this.position + 1)))+"*(("+this._dotStyles.marginRight+" + "+this._dotStyles.marginLeft+") + ("+this._dotStyles.borderLeftWidth+" + "+this._dotStyles.borderRightWidth+") + ("+this._dotStyles.paddingLeft+" + "+this._dotStyles.paddingRight+") + "+this._dotStyles.width+"))";
+        }
       },
       /**
       * Method for moving
@@ -330,8 +334,8 @@ Custom property | Description | Default
         });
       },
       /**
-      * Create the nav
-      * dots 1 for each slide
+      * Create the nav dots,
+      * 1 for each slide
       *
       */
       _createDots: function(t) {
@@ -340,6 +344,33 @@ Custom property | Description | Default
           array.push(i);
         };
         return array;
+        console.log(this.$.container.querySelector(".slider__dot").clientWidth);
+      },
+      /**
+      * Method for moving
+      * to the previous slide or
+      * to the last slide
+      * and setting focus
+      *
+      */
+      _keyLeft: function() {
+        var currentPos = parseInt(this.$.container.getAttribute('data-pos')),
+            nextPos = currentPos > 0 ? (currentPos-1) : (this.totalSlides - 1);
+        this.movePos(nextPos);
+        this.moveFocus(nextPos);
+      },
+      /**
+      * Method for moving
+      * to the next slide or back
+      * to the first slide
+      * and setting focus
+      *
+      */
+      _keyRight: function() {
+        var currentPos = parseInt(this.$.container.getAttribute('data-pos')),
+            nextPos = currentPos < (this.totalSlides - 1) ? (currentPos+1) : 0;
+        this.movePos(nextPos);
+        this.moveFocus(nextPos);
       },
       /**
       * Method to initiate
@@ -370,6 +401,7 @@ Custom property | Description | Default
             this$.movePos(e.target.getAttribute('data-pos'));
           });
         };
+        this._dotStyles = window.getComputedStyle(dotElems[0]);
       },
       /**
       * Method to reinitialise
@@ -377,18 +409,11 @@ Custom property | Description | Default
       *
       */
       _reInit: function() {
+        var this$ = this;
         this._animateCSS();
-        this.attached();
-      },
-      /**
-      * Styles the slider
-      * does slide width and container width
-      *
-      */
-      _setStyles: function() {
-        var deep = this.$.container.querySelector('.slider__slides'),
-            slides = deep.querySelectorAll('paper-slide'), i;
-        deep.style.width =  100 + "%";
+        setTimeout(function(){
+          this$._moveManual();
+        }, 0);
       },
       /**
       * Method for moving
@@ -454,6 +479,16 @@ Custom property | Description | Default
 
       /**
       * Method for moving
+      * focus to a different
+      * dot.
+      *
+      */
+      moveFocus: function(slide) {
+        var focusEl = this.$.container.querySelectorAll('.slider__dot')[slide];
+        focusEl.focus();
+      },
+      /**
+      * Method for moving
       * to the next slide or back
       * to the first slide
       *
@@ -492,15 +527,15 @@ Custom property | Description | Default
       */
       attached: function() {
         var this$ = this;
-        this._setStyles();
+        this.autoProgress == true 
+          ? setTimeout(function(){
+            this$._autoProceed()
+          }, 0) 
+          : false;
         // Strange hack, but it works.
-        setTimeout(function(){this$._moveManual();}, 0);
-        if (this._firstInit == false) {
-          this$.autoProgress == true 
-            ? setTimeout(function(){this$._autoProceed()}, 0) 
-            : false;
-          this$._firstInit = true;
-        };
+        setTimeout(function(){
+          this$._moveManual();
+        }, 0);
       },
     });
   })();
