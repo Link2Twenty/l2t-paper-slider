@@ -55,6 +55,7 @@ The following custom properties are available for styling:
 | --paper-slide-dot-selected | Color of selected Nav Dot | #FFF |
 | --paper-slide-width | Width of slide container | 100% |
 | --paper-slide-height | Height of slide container | 600px |
+| --paper-slide-dot-styles | (Mixin) Custom styles for dot | NULL |
 
 ## Attributes
 
@@ -76,7 +77,7 @@ required*
 | Attribute Name | Functionality | Type | Default |
 |----------------|-------------|-------------|-------------|
 | _totalDots | Array for storing number leading up to totalSlides | Array | [] |
-| _firstInit | Boolean value to indicate several inits | Boolean | false |
+| _dotStyles | Object for storing all the styles of the dot elements | Object | NULL |
 
 ## Methods
 
