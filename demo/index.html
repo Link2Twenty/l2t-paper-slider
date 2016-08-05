@@ -14,14 +14,6 @@
     <link rel="import" href="../l2t-paper-slider.html">
     <link rel="import" href="../../paper-button/paper-button.html">
     <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
-    <style is="custom-style">
-      .custom, .moveControl, .exNav, .swipeDis {
-        --paper-slide-width: 300px;
-        --paper-slide-height: 300px;
-        --paper-slide-dot: rgba(120,144,156 ,.8);
-        --paper-slide-dot-selected: rgba(38,50,56 ,1);
-      }
-    </style>
     <style>
       body {
         font-family: 'Roboto', sans-serif;
@@ -32,6 +24,9 @@
         height: 300px;
         margin: 20px auto;
         border: 1px solid rgba(0, 0, 0, 0.5);
+      }
+      .half-height {
+        height: 150px;
       }
       .container paper-button.proceed:last-child {
         float: right;
@@ -100,7 +95,7 @@
         </div>
       </template>
     </demo-snippet>
-    <demo-snippet><b>Styling:</b> (This needs to be in the head section)
+    <demo-snippet><b>Styling:</b>
       <template>
         <style is="custom-style">
           .swipeDis {
@@ -137,6 +132,40 @@
         </style>
       </template>
     </demo-snippet>
+        <br><br>
+    <demo-snippet><b>Example with styled 'dots':</b><br><br>
+      <template>
+        <div class="container half-height">
+          <l2t-paper-slider class="styledDots" total-slides="3">
+            <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=C5CAE9&txtclr=212121&txt=300%C3%97150&w=300&h=150&fm=png');"></paper-slide>
+            <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=BBDEFB&txtclr=212121&txt=300%C3%97150&w=300&h=150&fm=png');"></paper-slide>
+            <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=DCEDC8&txtclr=212121&txt=300%C3%97150&w=300&h=150&fm=png');"></paper-slide>
+          </l2t-paper-slider>
+        </div>
+      </template>
+    </demo-snippet>
+    <demo-snippet><b>Styling:</b>
+      <template>
+        <style is="custom-style">
+          .styledDots {
+            --paper-slide-width: 300px;
+            --paper-slide-height: 150px;
+            --paper-slide-dot: rgba(120,144,156 ,.8);
+            --paper-slide-dot-selected: rgba(38,50,56 ,1);
+            --paper-slide-dot-styles: {
+              width: 24px;
+              height: 8px;
+              margin: 6px;
+              border-width: 4px; 
+              border-style: inset; 
+              border-color: #ccc;
+              padding: 2px;
+              box-shadow: inset 0 0 5px 1px rgba(0,0,0,0.6);
+            }
+          }
+        </style>
+      </template>
+    </demo-snippet>
     <br><br>
     <demo-snippet><b>Example with auto progression:</b><br><br>
     <b>Notes:</b> Slides pause on mouse over
@@ -149,7 +178,7 @@
         </div>
       </template>
     </demo-snippet>
-    <demo-snippet><b>Styling:</b> (This needs to be in the head section)
+    <demo-snippet><b>Styling:</b>
       <template>
         <style is="custom-style">
           .custom {
@@ -176,7 +205,7 @@
         </div>
       </template>
     </demo-snippet>
-    <demo-snippet><b>Styling:</b> (This needs to be in the head section)
+    <demo-snippet><b>Styling:</b>
       <template>
         <style is="custom-style">
           .moveControl {
