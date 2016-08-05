@@ -95,9 +95,8 @@ required*
 |----------------|-------------|
 | _autoProceed() | Method for moving automatically ever slideDuration seconds |
 | _createDots(t) | Create the nav dots 1 for each slide | alert("You need to set the action attribute") |
-| _animateCSS()) | Method for styling and animating dots |
+| _animateCSS() | Method for styling and animating dots |
 | _listenerInit() | Adds onclick listener To update the position |
-| _setStyles() | Styles the slider does slide width and container width |
 | _reInit() | Method to reinitialise on totalSlides change |
 | _swipeHandler(e) | Method for adding swipe event handler |
 
