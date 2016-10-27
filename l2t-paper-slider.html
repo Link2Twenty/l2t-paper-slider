@@ -320,7 +320,7 @@ Custom property | Description | Default
       *
       */
       _autoProceed: function() {
-        this$ = this;
+        var this$ = this;
         var autoProceed = setInterval(function() {
           this$.moveNext();
         }, (this$.slideDuration * 1000));
