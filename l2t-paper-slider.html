@@ -57,7 +57,6 @@ Custom property | Description | Default
       font-size: 0;
       width: 100%;
       height: 100%;
-      background: #FFCDD2;
       -webkit-transition: -webkit-transform .3s cubic-bezier(.51, .92, .24, 1);
       transition: -webkit-transform .3s cubic-bezier(.51, .92, .24, 1);
       transition: transform .3s cubic-bezier(.51, .92, .24, 1);
@@ -378,15 +377,18 @@ Custom property | Description | Default
       *
       */
       _moveInd: function(dotElem) {
-        var sliderElem = this.$.container,
-            indicatorElem = sliderElem.querySelector('.slider__indicator'),
-            currentPos = parseInt(sliderElem.getAttribute('data-pos')),
-            newPos = parseInt(dotElem.getAttribute('data-pos')),
-            newDirection = newPos > currentPos ? 'right' : 'left',
-            currentDirection = newPos < currentPos ? 'right' : 'left';
-        indicatorElem.classList.remove('slider__indicator--' + currentDirection);
-        indicatorElem.classList.add('slider__indicator--' + newDirection);
-        this.position = newPos;
+        if(dotElem != undefined){
+          //#TODO:   clearInterval(this.moveNext()); ?
+          var sliderElem = this.$.container,
+              indicatorElem = sliderElem.querySelector('.slider__indicator'),
+              currentPos = parseInt(sliderElem.getAttribute('data-pos')),
+              newPos = parseInt(dotElem.getAttribute('data-pos')),
+              newDirection = newPos > currentPos ? 'right' : 'left',
+              currentDirection = newPos < currentPos ? 'right' : 'left';
+          indicatorElem.classList.remove('slider__indicator--' + currentDirection);
+          indicatorElem.classList.add('slider__indicator--' + newDirection);
+          this.position = newPos;
+        }
       },
       /**
       * Adds onclick listener
