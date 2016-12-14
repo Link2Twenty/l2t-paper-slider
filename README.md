@@ -51,11 +51,14 @@ The following custom properties are available for styling:
 
 | Custom property | Description | Default |
 |----------------|-------------|-------------|
+| --paper-slider-styles | (Mixin) Customs styles for slider container | NULL |
 | --paper-slide-dot | Color of unselected Nav Dot | rgba(255, 255, 255, .5) |
 | --paper-slide-dot-selected | Color of selected Nav Dot | #FFF |
 | --paper-slide-width | Width of slide container | 100% |
 | --paper-slide-height | Height of slide container | 600px |
+| --paper-slider-dot-container-styles | (Mixin) Custom styles for dot container | NULL |
 | --paper-slide-dot-styles | (Mixin) Custom styles for dot | NULL |
+| --paper-slide-background | Default background color for slides | rgba(0, 0, 0, 0) |
 
 ## Attributes
 
