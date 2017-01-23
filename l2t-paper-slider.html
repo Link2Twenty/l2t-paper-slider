@@ -1,5 +1,6 @@
 <link rel="import" href="../polymer/polymer.html"> 
 <link rel="import" href="../iron-a11y-keys-behavior/iron-a11y-keys-behavior.html"> 
+<script src="../inert-polyfill/inert-polyfill.min.js"></script>
 
 <!--
   Polymer element for displaying slides in a carousel.
@@ -246,7 +247,7 @@ Custom property | Description | Default
           value: 0,
           notify: true,
           reflectToAttribute: true,
-          observer: '_animateCSS'
+          observer: '_posObs'
         },
         /**
         * String to storing
@@ -412,6 +413,16 @@ Custom property | Description | Default
         this._dotStyles = window.getComputedStyle(dotElems[0]);
       },
       /**
+      * Function to store
+      * functions for the 
+      * position observer
+      *
+      */
+      _posObs: function() {
+        this._animateCSS();
+        this._setInert();
+      },
+      /**
       * Method to reinitialise
       * on totalSlides change.
       *
@@ -422,6 +433,18 @@ Custom property | Description | Default
         setTimeout(function(){
           this$._moveManual();
         }, 0);
+      },
+      /**
+      * Method for setting
+      * inert on hidden slides
+      */
+      _setInert: function() {
+        var deep = this.$.container,
+            sliSel = deep.querySelectorAll('paper-slide');
+        for (var i = 0; i < sliSel.length; i++) {
+          sliSel[i].setAttribute("inert", "")
+        }
+        sliSel[this.position].removeAttribute("inert");
       },
       /**
       * Method for moving
