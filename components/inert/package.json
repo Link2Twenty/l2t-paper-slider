@@ -1,0 +1,66 @@
+{
+  "name": "wicg-inert",
+  "version": "1.1.0",
+  "description": "A polyfill for the proposed inert API",
+  "main": "dist/inert.js",
+  "scripts": {
+    "test": "gulp && easy-sauce"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WICG/inert.git"
+  },
+  "keywords": [
+    "inert",
+    "polyfill",
+    "browser"
+  ],
+  "author": "Alice Boxhall <alice@chromium.org>",
+  "contributors": [
+    "Rob Dodson <robdodson@chromium.org>",
+    "Jesse Beach",
+    "Brian Kardell"
+  ],
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/WICG/inert/issues"
+  },
+  "homepage": "https://github.com/WICG/inert#readme",
+  "devDependencies": {
+    "babel-polyfill": "^6.13.0",
+    "babel-preset-es2015": "^6.13.2",
+    "chai": "^3.5.0",
+    "del": "^2.2.2",
+    "easy-sauce": "^0.4.1",
+    "gulp": "gulpjs/gulp#4.0",
+    "gulp-babel": "^6.1.2",
+    "gulp-rename": "^1.2.2",
+    "gulp-sourcemaps": "^2.2.0",
+    "gulp-uglify": "^2.0.0",
+    "mocha": "^3.1.2",
+    "whatwg-fetch": "^1.0.0"
+  },
+  "easySauce": {
+    "username": "robdodson_inert",
+    "key": "a844aee9-d3ec-4566-94e3-dba3d0c30248",
+    "testPath": "/test/",
+    "port": "8080",
+    "platforms": [
+      [
+        "Windows 10",
+        "chrome",
+        "latest"
+      ],
+      [
+        "Linux",
+        "firefox",
+        "latest"
+      ],
+      [
+        "OS X 10.11",
+        "safari",
+        "10"
+      ]
+    ]
+  }
+}

@@ -1,6 +1,6 @@
 {
   "name": "l2t-paper-slider",
-  "version": "1.2.0",
+  "version": "1.2.6",
   "description": "Polymer element for displaying slides in a carousel",
   "homepage": "https://github.com/Link2Twenty/l2t-paper-slider",
   "authors": [
@@ -13,6 +13,7 @@
   },
   "keywords": [
     "Polymer",
+    "carousel",
     "web-components"
   ],
   "license": "MIT",
@@ -25,7 +26,8 @@
   ],
   "dependencies": {
     "polymer": "Polymer/polymer#^1.2.0",
-    "iron-a11y-keys-behavior": "PolymerElements/iron-a11y-keys-behavior#^1.0.0"
+    "iron-a11y-keys-behavior": "PolymerElements/iron-a11y-keys-behavior#^1.0.0",
+    "inert": "WICG/inert#^1.1.0"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
@@ -39,11 +41,11 @@
     "web-component-tester": "^4.0.0",
     "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
   },
-  "_release": "1.2.0",
+  "_release": "1.2.6",
   "_resolution": {
     "type": "version",
-    "tag": "v1.2.0",
-    "commit": "fdd659d56eb4444d1ac3a8b3a4f6996f08469174"
+    "tag": "v1.2.6",
+    "commit": "5824c653b7ec1d12f074708dd3ce0d32c302b6b8"
   },
   "_source": "https://github.com/Link2Twenty/l2t-paper-slider.git",
   "_target": "*",

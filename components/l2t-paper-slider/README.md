@@ -51,10 +51,14 @@ The following custom properties are available for styling:
 
 | Custom property | Description | Default |
 |----------------|-------------|-------------|
+| --paper-slider-styles | (Mixin) Customs styles for slider container | NULL |
 | --paper-slide-dot | Color of unselected Nav Dot | rgba(255, 255, 255, .5) |
 | --paper-slide-dot-selected | Color of selected Nav Dot | #FFF |
 | --paper-slide-width | Width of slide container | 100% |
 | --paper-slide-height | Height of slide container | 600px |
+| --paper-slider-dot-container-styles | (Mixin) Custom styles for dot container | NULL |
+| --paper-slide-dot-styles | (Mixin) Custom styles for dot | NULL |
+| --paper-slide-background | Default background color for slides | rgba(0, 0, 0, 0) |
 
 ## Attributes
 
@@ -76,7 +80,7 @@ required*
 | Attribute Name | Functionality | Type | Default |
 |----------------|-------------|-------------|-------------|
 | _totalDots | Array for storing number leading up to totalSlides | Array | [] |
-| _firstInit | Boolean value to indicate several inits | Boolean | false |
+| _dotStyles | Object for storing all the styles of the dot elements | Object | NULL |
 
 ## Methods
 
@@ -94,9 +98,8 @@ required*
 |----------------|-------------|
 | _autoProceed() | Method for moving automatically ever slideDuration seconds |
 | _createDots(t) | Create the nav dots 1 for each slide | alert("You need to set the action attribute") |
-| _animateCSS()) | Method for styling and animating dots |
+| _animateCSS() | Method for styling and animating dots |
 | _listenerInit() | Adds onclick listener To update the position |
-| _setStyles() | Styles the slider does slide width and container width |
 | _reInit() | Method to reinitialise on totalSlides change |
 | _swipeHandler(e) | Method for adding swipe event handler |
 

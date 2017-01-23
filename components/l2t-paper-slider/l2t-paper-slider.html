@@ -1,5 +1,6 @@
 <link rel="import" href="../polymer/polymer.html"> 
 <link rel="import" href="../iron-a11y-keys-behavior/iron-a11y-keys-behavior.html"> 
+<script src="../inert/src/inert.js"></script>
 
 <!--
   Polymer element for displaying slides in a carousel.
@@ -33,11 +34,14 @@
 
 Custom property | Description | Default
 ----------------|-------------|----------
-`--paper-slide-dot` | Color of unselected Nav Dot. | `rgba(255, 255, 255, .5)`
+`--paper-slide-dot` | Color of unselected Nav Dot. | `rgba(255, 255, 255, .5)
 `--paper-slide-dot-selected` | Color of selected Nav Dot. | `#FFF`
 `--paper-slide-width` | Width of slide container. | `100%`
 `--paper-slide-height` | Height of slide container. | `600px`
-`--paper-slide-dot-styles` | (Mixin) Custon styles for dots| NULL
+`--paper-slider-styles` | (Mixin) Customs styles for slider container | NULL 
+`--paper-slider-dot-container-styles` | (Mixin) Custom styles for dot container | NULL 
+`--paper-slide-dot-styles` | (Mixin) Custon styles for dots | NULL
+`--paper-slide-background` | Default background color for slides | `rgba(0,0,0,0)`
 
   @element l2t-paper-slider
   @demo demo/index.html
@@ -50,14 +54,15 @@ Custom property | Description | Default
       overflow: hidden;
       display: box;
       display: -webkit-box;
-      white-space: nowrap
+      white-space: nowrap;
+      @apply(--paper-slider-styles);
     }
     .slider__slides {
       position: relative;
       font-size: 0;
       width: 100%;
       height: 100%;
-      background: #FFCDD2;
+      background: var(--paper-slide-background, rgba(0,0,0,0));
       -webkit-transition: -webkit-transform .3s cubic-bezier(.51, .92, .24, 1);
       transition: -webkit-transform .3s cubic-bezier(.51, .92, .24, 1);
       transition: transform .3s cubic-bezier(.51, .92, .24, 1);
@@ -73,7 +78,8 @@ Custom property | Description | Default
       bottom: 5%;
       left: 50%;
       -webkit-transform: translateX(-50%);
-      transform: translateX(-50%)
+      transform: translateX(-50%);
+      @apply(--paper-slider-dot-container-styles);
     }
     *[hidden] {
       display: none;
@@ -241,7 +247,7 @@ Custom property | Description | Default
           value: 0,
           notify: true,
           reflectToAttribute: true,
-          observer: '_animateCSS'
+          observer: '_posObs'
         },
         /**
         * String to storing
@@ -320,7 +326,7 @@ Custom property | Description | Default
       *
       */
       _autoProceed: function() {
-        this$ = this;
+        var this$ = this;
         var autoProceed = setInterval(function() {
           this$.moveNext();
         }, (this$.slideDuration * 1000));
@@ -378,15 +384,18 @@ Custom property | Description | Default
       *
       */
       _moveInd: function(dotElem) {
-        var sliderElem = this.$.container,
-            indicatorElem = sliderElem.querySelector('.slider__indicator'),
-            currentPos = parseInt(sliderElem.getAttribute('data-pos')),
-            newPos = parseInt(dotElem.getAttribute('data-pos')),
-            newDirection = newPos > currentPos ? 'right' : 'left',
-            currentDirection = newPos < currentPos ? 'right' : 'left';
-        indicatorElem.classList.remove('slider__indicator--' + currentDirection);
-        indicatorElem.classList.add('slider__indicator--' + newDirection);
-        this.position = newPos;
+        if(dotElem != undefined){
+          //#TODO:   clearInterval(this.moveNext()); ?
+          var sliderElem = this.$.container,
+              indicatorElem = sliderElem.querySelector('.slider__indicator'),
+              currentPos = parseInt(sliderElem.getAttribute('data-pos')),
+              newPos = parseInt(dotElem.getAttribute('data-pos')),
+              newDirection = newPos > currentPos ? 'right' : 'left',
+              currentDirection = newPos < currentPos ? 'right' : 'left';
+          indicatorElem.classList.remove('slider__indicator--' + currentDirection);
+          indicatorElem.classList.add('slider__indicator--' + newDirection);
+          this.position = newPos;
+        }
       },
       /**
       * Adds onclick listener
@@ -404,6 +413,16 @@ Custom property | Description | Default
         this._dotStyles = window.getComputedStyle(dotElems[0]);
       },
       /**
+      * Function to store
+      * functions for the 
+      * position observer
+      *
+      */
+      _posObs: function() {
+        this._animateCSS();
+        this._setInert();
+      },
+      /**
       * Method to reinitialise
       * on totalSlides change.
       *
@@ -414,6 +433,18 @@ Custom property | Description | Default
         setTimeout(function(){
           this$._moveManual();
         }, 0);
+      },
+      /**
+      * Method for setting
+      * inert on hidden slides
+      */
+      _setInert: function() {
+        var deep = this.$.container,
+            sliSel = deep.querySelectorAll('paper-slide');
+        for (var i = 0; i < sliSel.length; i++) {
+          sliSel[i].setAttribute("inert", "")
+        }
+        sliSel[this.position].removeAttribute("inert");
       },
       /**
       * Method for moving
