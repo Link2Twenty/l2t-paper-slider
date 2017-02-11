@@ -16,7 +16,17 @@ bower install --save l2t-paper-slider
 ## Examples
 
 Each slide must be within a paper-slide tag, but other than that you have complete control.
-
+<!---
+```
+<custom-element-demo>
+  <template>
+    <script src="../webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="l2t-paper-slider.html">
+	 <next-code-block></next-code-block>
+  </template>
+</custom-element-demo>
+```
+-->
 ```html
   <l2t-paper-slider total-slides="4">
     <paper-slide>#1</paper-slide>
@@ -28,6 +38,17 @@ Each slide must be within a paper-slide tag, but other than that you have comple
   
 There is also auto progression and slide duration for how long it should remain on one slide
 
+<!---
+```
+<custom-element-demo>
+  <template>
+    <script src="../webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="l2t-paper-slider.html">
+	 <next-code-block></next-code-block>
+  </template>
+</custom-element-demo>
+```
+-->
 ```html
   <l2t-paper-slider auto-progress slide-duration="2" total-slides="3">
     <paper-slide>#1</paper-slide>
@@ -38,6 +59,17 @@ There is also auto progression and slide duration for how long it should remain 
   
 You can set a different default start position, the first start postion is 0 (as opposed to 1)
 
+<!---
+```
+<custom-element-demo>
+  <template>
+    <script src="../webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="l2t-paper-slider.html">
+	 <next-code-block></next-code-block>
+  </template>
+</custom-element-demo>
+```
+-->
 ```html
   <l2t-paper-slider total-slides="2" position="1">
     <paper-slide>#1</paper-slide>
