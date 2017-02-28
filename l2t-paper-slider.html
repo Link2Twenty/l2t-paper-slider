@@ -421,6 +421,7 @@ Custom property | Description | Default
       _posObs: function() {
         this._animateCSS();
         this._setInert();
+        this.fire('change');
       },
       /**
       * Method to reinitialise
