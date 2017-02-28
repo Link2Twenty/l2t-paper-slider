@@ -442,9 +442,13 @@ Custom property | Description | Default
         var deep = this.$.container,
             sliSel = deep.querySelectorAll('paper-slide');
         for (var i = 0; i < sliSel.length; i++) {
-          sliSel[i].setAttribute("inert", "")
+          if(i != this.position) {
+            sliSel[i].setAttribute("inert", "")
+          }
         }
-        sliSel[this.position].removeAttribute("inert");
+        if(sliSel[this.position]) {
+          sliSel[this.position].removeAttribute("inert");
+        }
       },
       /**
       * Method for moving
