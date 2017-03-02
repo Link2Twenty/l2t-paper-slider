@@ -25,6 +25,16 @@ Each slide must be within a paper-slide tag, but other than that you have comple
 	 <next-code-block></next-code-block>
   </template>
 </custom-element-demo>
+<style is="custom-style">
+  l2t-paper-slider {
+    --paper-slide-height: 200px;
+    line-height: 200px;
+    font-size: 64px;
+    text-align: center;
+    vertical-align: middle;
+    background: tomato;
+  }
+</style>
 ```
 -->
 ```html
@@ -47,6 +57,16 @@ There is also auto progression and slide duration for how long it should remain 
 	 <next-code-block></next-code-block>
   </template>
 </custom-element-demo>
+<style is="custom-style">
+  l2t-paper-slider {
+    --paper-slide-height: 200px;
+    line-height: 200px;
+    font-size: 64px;
+    text-align: center;
+    vertical-align: middle;
+    background: tomato;
+  }
+</style>
 ```
 -->
 ```html
@@ -68,6 +88,16 @@ You can set a different default start position, the first start postion is 0 (as
 	 <next-code-block></next-code-block>
   </template>
 </custom-element-demo>
+<style is="custom-style">
+  l2t-paper-slider {
+    --paper-slide-height: 200px;
+    line-height: 200px;
+    font-size: 64px;
+    text-align: center;
+    vertical-align: middle;
+    background: tomato;
+  }
+</style>
 ```
 -->
 ```html
