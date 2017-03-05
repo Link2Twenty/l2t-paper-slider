@@ -25,16 +25,6 @@ Each slide must be within a paper-slide tag, but other than that you have comple
 	 <next-code-block></next-code-block>
   </template>
 </custom-element-demo>
-<style is="custom-style">
-  l2t-paper-slider {
-    --paper-slide-height: 200px;
-    line-height: 200px;
-    font-size: 64px;
-    text-align: center;
-    vertical-align: middle;
-    background: tomato;
-  }
-</style>
 ```
 -->
 ```html
@@ -57,16 +47,6 @@ There is also auto progression and slide duration for how long it should remain 
 	 <next-code-block></next-code-block>
   </template>
 </custom-element-demo>
-<style is="custom-style">
-  l2t-paper-slider {
-    --paper-slide-height: 200px;
-    line-height: 200px;
-    font-size: 64px;
-    text-align: center;
-    vertical-align: middle;
-    background: tomato;
-  }
-</style>
 ```
 -->
 ```html
@@ -88,16 +68,6 @@ You can set a different default start position, the first start postion is 0 (as
 	 <next-code-block></next-code-block>
   </template>
 </custom-element-demo>
-<style is="custom-style">
-  l2t-paper-slider {
-    --paper-slide-height: 200px;
-    line-height: 200px;
-    font-size: 64px;
-    text-align: center;
-    vertical-align: middle;
-    background: tomato;
-  }
-</style>
 ```
 -->
 ```html
@@ -121,6 +91,34 @@ The following custom properties are available for styling:
 | --paper-slider-dot-container-styles | (Mixin) Custom styles for dot container | NULL |
 | --paper-slide-dot-styles | (Mixin) Custom styles for dot | NULL |
 | --paper-slide-background | Default background color for slides | rgba(0, 0, 0, 0) |
+
+### Example
+<!---
+```
+<custom-element-demo>
+  <template>
+    <script src="../webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="l2t-paper-slider.html">
+	 <next-code-block></next-code-block>
+  </template>
+</custom-element-demo>
+```
+-->
+```html
+<style is="custom-style">
+  l2t-paper-slider {
+    --paper-slide-height: 200px;
+    --paper-slide-background: tomato;
+  }
+  
+  paper-slide {
+    line-height: 200px;
+    font-size: 64px;
+    text-align: center;
+    vertical-align: middle;
+  }
+</style>
+```
 
 ## Attributes
 
