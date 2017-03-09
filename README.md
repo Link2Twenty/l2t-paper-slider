@@ -23,7 +23,6 @@ Each slide must be within a paper-slide tag, but other than that you have comple
     <style is="custom-style">
       l2t-paper-slider {
         --paper-slide-height: 200px;
-        --paper-slide-background: tomato;
       }
       
       paper-slide {
@@ -31,6 +30,8 @@ Each slide must be within a paper-slide tag, but other than that you have comple
         font-size: 64px;
         text-align: center;
         vertical-align: middle;
+	color: white;
+	background: tomato;
       }
     </style>
     <script src="../webcomponentsjs/webcomponents-lite.js"></script>
@@ -58,7 +59,6 @@ There is also auto progression and slide duration for how long it should remain 
     <style is="custom-style">
       l2t-paper-slider {
         --paper-slide-height: 200px;
-        --paper-slide-background: tomato;
       }
       
       paper-slide {
@@ -66,6 +66,8 @@ There is also auto progression and slide duration for how long it should remain 
         font-size: 64px;
         text-align: center;
         vertical-align: middle;
+	color: white;
+	background: tomato;
       }
     </style>
     <script src="../webcomponentsjs/webcomponents-lite.js"></script>
@@ -92,7 +94,6 @@ You can set a different default start position, the first start postion is 0 (as
     <style is="custom-style">
       l2t-paper-slider {
         --paper-slide-height: 200px;
-        --paper-slide-background: tomato;
       }
       
       paper-slide {
@@ -100,6 +101,8 @@ You can set a different default start position, the first start postion is 0 (as
         font-size: 64px;
         text-align: center;
         vertical-align: middle;
+	color: white;
+	background: tomato;
       }
     </style>
     <script src="../webcomponentsjs/webcomponents-lite.js"></script>
