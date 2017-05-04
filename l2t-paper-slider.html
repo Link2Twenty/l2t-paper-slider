@@ -428,7 +428,9 @@ Custom property | Description | Default
             this$.movePos(e.target.getAttribute('aria-posinset'));
           });
         };
-        this._dotStyles = window.getComputedStyle(dotElems[0]);
+        if(this.totalSlides) {
+          this._dotStyles = window.getComputedStyle(dotElems[0]);
+        }
       },
       /**
       * Function to store
