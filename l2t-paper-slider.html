@@ -502,14 +502,8 @@ Custom property | Description | Default
             case 'track':
               var actualWidth = deep.offsetWidth;
               var swipeTravel = this.startPosX - e.detail.x;
-              var percentMove = ((swipeTravel/actualWidth) * 100) <= 100
-                                ? ((swipeTravel/actualWidth) * 100) + ((this.position) * 100)
-                                : 100 + ((this.position) * 100);
-              this.perMov     = percentMove <= (this.totalSlides - 1) * 100
-                                ? percentMove >= 0
-                                ? percentMove
-                                : 0
-                                : (this.totalSlides - 1) * 100;
+              var percentMove = perActual>100?(this.position*100)+100:perActual<-100?(this.position*100)-100:perActual+(this.position*100);
+              this.perMov = percentMove<=100*(this.totalSlides-1)?percentMove>=0&&percentMove:this.totalSlides;
               deep.querySelector(".slider__slides").style.transform = "translateX(-"+this.perMov+"%)";
             break;
             case 'end':
