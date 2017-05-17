@@ -1,3 +1,4 @@
+
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../iron-a11y-keys-behavior/iron-a11y-keys-behavior.html">
 <link rel="import" src="../inert/inert.html">
@@ -56,7 +57,7 @@ Custom property | Description | Default
         display: box;
         display: -webkit-box;
         white-space: nowrap;
-        @apply(--paper-slider-styles);
+        @apply --paper-slider-styles;
       }
       .slider__slides {
         position: relative;
@@ -82,7 +83,7 @@ Custom property | Description | Default
         left: 50%;
         -webkit-transform: translateX(-50%);
         transform: translateX(-50%);
-        @apply(--paper-slider-dot-container-styles);
+        @apply --paper-slider-dot-container-styles ;
       }
       *[hidden] {
         display: none;
@@ -96,7 +97,7 @@ Custom property | Description | Default
         background: var(--paper-slide-dot, rgba(255, 255, 255, .5));
         border-radius: 8px;
         cursor: pointer;
-        @apply(--paper-slide-dot-styles);
+        @apply --paper-slide-dot-styles;
       }
       .slider__dot:focus {
         outline: none;
@@ -124,10 +125,10 @@ Custom property | Description | Default
         width: var(--paper-slide-width, 100%);
         height: var(--paper-slide-height, 600px)
       }
-      :host ::slotted(*), :host ::content * {
+      .slider__slides ::slotted(*) {
         font-size: medium;
       }
-      :host ::slotted(paper-slide), :host ::content paper-slide{
+      .slider__slides ::slotted(paper-slide) {
         width: var(--paper-slide-width, 100%);
         height: var(--paper-slide-height, 600px);
         overflow-x: hidden;
@@ -137,7 +138,6 @@ Custom property | Description | Default
     <div id="container" class="slider" data-pos$="[[position]]">
       <div class="slider__slides mouseup">
         <slot></slot>
-        <content></content>
       </div>
       <div role="menubar" hidden$="[[hideNav]]" class="slider__dots">
         <span class="slider__indicator"></span>
@@ -146,8 +146,8 @@ Custom property | Description | Default
         </template>
       </div>
     </div>
-  </template> 
-</dom-module> 
+  </template>
+</dom-module>
 <script>
   ( function () {
     Polymer({
@@ -482,7 +482,11 @@ Custom property | Description | Default
       */
       _spaceCatcher: function(e) {
         e.preventDefault();
-        var nextPos = document.activeElement.getAttribute('aria-posinset');
+        if(this.shadowRoot != null) {
+          var nextPos = this.shadowRoot.activeElement.getAttribute('aria-posinset');
+        } else {
+          var nextPos = document.activeElement.getAttribute('aria-posinset');
+        }
         if (!nextPos)
         return;
         this.movePos(nextPos);
@@ -583,6 +587,9 @@ Custom property | Description | Default
         }, 0);
 
         //allow vertical scrolling
+        if (Polymer.version >= "2") {
+          Polymer.Gestures.addListener(this.$.container, 'track', e => this._swipeHandler(e));
+        }
         this.setScrollDirection('y', this.$.container);
       },
     });
