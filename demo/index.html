@@ -3,17 +3,30 @@
     <title>l2t-paper-slider</title>
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=no">
     <meta name="theme-color" content="#003366">
-    <script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
-    <script>
-      /* this script must run before Polymer is imported */
-      window.Polymer = {
-        dom: 'shady',
-        lazyRegister: true
-      };
-    </script>
+    <script src="../../webcomponentsjs/webcomponents.js"></script>
     <link rel="import" href="../l2t-paper-slider.html">
     <link rel="import" href="../../paper-button/paper-button.html">
     <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    <custom-style>
+      <style is="custom-style">
+        .styledDots {
+          --paper-slide-width: 300px;
+          --paper-slide-height: 150px;
+          --paper-slide-dot: rgba(120,144,156 ,.8);
+          --paper-slide-dot-selected: rgba(38,50,56 ,1);
+          --paper-slide-dot-styles: {
+            width: 24px;
+            height: 8px;
+            margin: 6px;
+            border-width: 4px;
+            border-style: inset;
+            border-color: #ccc;
+            padding: 2px;
+            box-shadow: inset 0 0 5px 1px rgba(0,0,0,0.6);
+          }
+        }
+      </style>
+    </custom-style>
     <style>
       body {
         font-family: 'Roboto', sans-serif;
@@ -95,16 +108,18 @@
         </div>
       </template>
     </demo-snippet>
-    <demo-snippet><b>Styling:</b>
+    <demo-snippet><b>Styling:</b> (This needs to be in the head section)
       <template>
-        <style is="custom-style">
-          .swipeDis {
-            --paper-slide-width: 300px;
-            --paper-slide-height: 300px;
-            --paper-slide-dot: rgba(120,144,156 ,.8);
-            --paper-slide-dot-selected: rgba(38,50,56 ,1);
-          }
-        </style>
+        <custom-style>
+          <style is="custom-style">
+            .swipeDis {
+              --paper-slide-width: 300px;
+              --paper-slide-height: 300px;
+              --paper-slide-dot: rgba(120,144,156 ,.8);
+              --paper-slide-dot-selected: rgba(38,50,56 ,1);
+            }
+          </style>
+        </custom-style>
       </template>
     </demo-snippet>
     <br><br>
@@ -124,12 +139,14 @@
     </demo-snippet>
     <demo-snippet><b>Styling:</b> (This needs to be in the head section)
       <template>
-        <style is="custom-style">
-          .exNav {
-            --paper-slide-width: 300px;
-            --paper-slide-height: 300px;
-          }
-        </style>
+        <custom-style>
+          <style is="custom-style">
+            .exNav {
+              --paper-slide-width: 300px;
+              --paper-slide-height: 300px;
+            }
+          </style>
+        </custom-style>
       </template>
     </demo-snippet>
         <br><br>
@@ -144,26 +161,28 @@
         </div>
       </template>
     </demo-snippet>
-    <demo-snippet><b>Styling:</b>
+    <demo-snippet><b>Styling:</b> (This needs to be in the head section)
       <template>
-        <style is="custom-style">
-          .styledDots {
-            --paper-slide-width: 300px;
-            --paper-slide-height: 150px;
-            --paper-slide-dot: rgba(120,144,156 ,.8);
-            --paper-slide-dot-selected: rgba(38,50,56 ,1);
-            --paper-slide-dot-styles: {
-              width: 24px;
-              height: 8px;
-              margin: 6px;
-              border-width: 4px; 
-              border-style: inset; 
-              border-color: #ccc;
-              padding: 2px;
-              box-shadow: inset 0 0 5px 1px rgba(0,0,0,0.6);
+        <custom-style>
+          <style is="custom-style">
+            .styledDots {
+              --paper-slide-width: 300px;
+              --paper-slide-height: 150px;
+              --paper-slide-dot: rgba(120,144,156 ,.8);
+              --paper-slide-dot-selected: rgba(38,50,56 ,1);
+              --paper-slide-dot-styles: {
+                width: 24px;
+                height: 8px;
+                margin: 6px;
+                border-width: 4px;
+                border-style: inset;
+                border-color: #ccc;
+                padding: 2px;
+                box-shadow: inset 0 0 5px 1px rgba(0,0,0,0.6);
+              }
             }
-          }
-        </style>
+          </style>
+        </custom-style>
       </template>
     </demo-snippet>
     <br><br>
@@ -178,16 +197,18 @@
         </div>
       </template>
     </demo-snippet>
-    <demo-snippet><b>Styling:</b>
+    <demo-snippet><b>Styling:</b> (This needs to be in the head section)
       <template>
-        <style is="custom-style">
-          .custom {
-            --paper-slide-width: 300px;
-            --paper-slide-height: 300px;
-            --paper-slide-dot: rgba(120,144,156 ,.8);
-            --paper-slide-dot-selected: rgba(38,50,56 ,1);
-          }
-        </style>
+        <custom-style>
+          <style is="custom-style">
+            .custom {
+              --paper-slide-width: 300px;
+              --paper-slide-height: 300px;
+              --paper-slide-dot: rgba(120,144,156 ,.8);
+              --paper-slide-dot-selected: rgba(38,50,56 ,1);
+            }
+          </style>
+        </custom-style>
       </template>
     </demo-snippet>
     <br><br>
@@ -205,16 +226,18 @@
         </div>
       </template>
     </demo-snippet>
-    <demo-snippet><b>Styling:</b>
+    <demo-snippet><b>Styling:</b> (This needs to be in the head section)
       <template>
-        <style is="custom-style">
-          .moveControl {
-            --paper-slide-width: 300px;
-            --paper-slide-height: 300px;
-            --paper-slide-dot: rgba(120,144,156 ,.8);
-            --paper-slide-dot-selected: rgba(38,50,56 ,1);
-          }
-        </style>
+        <custom-style>
+          <style is="custom-style">
+            .moveControl {
+              --paper-slide-width: 300px;
+              --paper-slide-height: 300px;
+              --paper-slide-dot: rgba(120,144,156 ,.8);
+              --paper-slide-dot-selected: rgba(38,50,56 ,1);
+            }
+          </style>
+        </custom-style>
       </template>
     </demo-snippet>
     <br><br>
@@ -245,7 +268,7 @@
             selector.querySelector('#container').querySelector(".slider__slides").appendChild(node);
             ++selector.totalSlides;
           };
-          
+
           function remSlide() {
             var selector = document.querySelector('.reinit-demo');
             var slides = selector.querySelector('#container').querySelector(".slider__slides");
@@ -256,12 +279,12 @@
               selector.movePos((selector.totalSlides -1));
             }
           };
-          
+
           function toggleNav(id) {
             var selector = document.querySelector(id);
             selector.hideNav = !(selector.hideNav);
           };
-          
+
           function toggleSwipe(id) {
             var selector = document.querySelector(id);
             selector.disableSwipe = !(selector.disableSwipe);
