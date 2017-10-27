@@ -1,0 +1,1191 @@
+{
+  "schema_version": "1.0.0",
+  "elements": [
+    {
+      "description": "Polymer element for displaying slides in a carousel.\n  ### Examples\n  Each slide must be within a paper-slide tag, but other than that you have complete control.\n\n      <l2t-paper-slider total-slides=\"4\">\n        <paper-slide>#1</paper-slide>\n        <paper-slide>#2</paper-slide>\n        <paper-slide>#3</paper-slide>\n        <paper-slide>#4</paper-slide>\n      </l2t-paper-slider>\n\n  There is also auto progression and slide duration for how long it should remain on one slide\n\n      <l2t-paper-slider auto-progress slide-duration=\"2\" total-slides=\"3\">\n        <paper-slide>#1</paper-slide>\n        <paper-slide>#2</paper-slide>\n        <paper-slide>#3</paper-slide>\n      </l2t-paper-slider>\n\n  You can set a different default start position, the first start postion is 0 (as opposed to 1)\n\n      <l2t-paper-slider position=\"1\" total-slides=\"2\">\n        <paper-slide>#1</paper-slide>\n        <paper-slide>#2</paper-slide>\n      </l2t-paper-slider>\n\n  ### Styling\n  The following custom properties are available for styling:\n\nCustom property | Description | Default\n----------------|-------------|----------\n`--paper-slide-dot` | Color of unselected Nav Dot. | `rgba(255, 255, 255, .5)\n`--paper-slide-dot-selected` | Color of selected Nav Dot. | `#FFF`\n`--paper-slide-width` | Width of slide container. | `100%`\n`--paper-slide-height` | Height of slide container. | `600px`\n`--paper-slider-styles` | (Mixin) Customs styles for slider container | NULL\n`--paper-slider-dot-container-styles` | (Mixin) Custom styles for dot container | NULL\n`--paper-slide-dot-styles` | (Mixin) Custon styles for dots | NULL\n`--paper-slide-background` | Default background color for slides | `rgba(0,0,0,0)`",
+      "summary": "",
+      "path": "l2t-paper-slider.html",
+      "properties": [
+        {
+          "name": "keyEventTarget",
+          "type": "?EventTarget",
+          "description": "The EventTarget that will be firing relevant KeyboardEvents. Set it to\n`null` to disable the listeners.",
+          "privacy": "public",
+          "sourceRange": {
+            "file": "bower_components/iron-a11y-keys-behavior/iron-a11y-keys-behavior.html",
+            "start": {
+              "line": 278,
+              "column": 8
+            },
+            "end": {
+              "line": 283,
+              "column": 9
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          },
+          "inheritedFrom": "Polymer.IronA11yKeysBehavior"
+        },
+        {
+          "name": "stopKeyboardEventPropagation",
+          "type": "boolean",
+          "description": "If true, this property will cause the implementing element to\nautomatically stop propagation on any handled KeyboardEvents.",
+          "privacy": "public",
+          "sourceRange": {
+            "file": "bower_components/iron-a11y-keys-behavior/iron-a11y-keys-behavior.html",
+            "start": {
+              "line": 289,
+              "column": 8
+            },
+            "end": {
+              "line": 292,
+              "column": 9
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          },
+          "defaultValue": "false",
+          "inheritedFrom": "Polymer.IronA11yKeysBehavior"
+        },
+        {
+          "name": "_boundKeyHandlers",
+          "type": "Array",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "bower_components/iron-a11y-keys-behavior/iron-a11y-keys-behavior.html",
+            "start": {
+              "line": 294,
+              "column": 8
+            },
+            "end": {
+              "line": 299,
+              "column": 9
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          },
+          "defaultValue": "[]",
+          "inheritedFrom": "Polymer.IronA11yKeysBehavior"
+        },
+        {
+          "name": "_imperativeKeyBindings",
+          "type": "Object",
+          "description": "own properties of everything on the \"prototype\".",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "bower_components/iron-a11y-keys-behavior/iron-a11y-keys-behavior.html",
+            "start": {
+              "line": 303,
+              "column": 8
+            },
+            "end": {
+              "line": 308,
+              "column": 9
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          },
+          "defaultValue": "{}",
+          "inheritedFrom": "Polymer.IronA11yKeysBehavior"
+        },
+        {
+          "name": "keyBindings",
+          "type": "Object",
+          "description": "",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 303,
+              "column": 6
+            },
+            "end": {
+              "line": 308,
+              "column": 7
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          }
+        },
+        {
+          "name": "hostAttributes",
+          "type": "Object",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 160,
+              "column": 6
+            },
+            "end": {
+              "line": 162,
+              "column": 7
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          }
+        },
+        {
+          "name": "_totalDots",
+          "type": "Array",
+          "description": "Array for storing number\nleading up to totalSlides",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 175,
+              "column": 8
+            },
+            "end": {
+              "line": 180,
+              "column": 9
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "notify": true,
+              "readOnly": true
+            }
+          },
+          "defaultValue": "[]"
+        },
+        {
+          "name": "_dotStyles",
+          "type": "Object",
+          "description": "Object for storing\nall the styles of the\ndot elements",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 190,
+              "column": 8
+            },
+            "end": {
+              "line": 194,
+              "column": 9
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "notify": true,
+              "observer": "\"_animateCSS\""
+            }
+          }
+        },
+        {
+          "name": "autoProgress",
+          "type": "boolean",
+          "description": "Boolean value to\nstate if slides should\nauto proceed",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 207,
+              "column": 8
+            },
+            "end": {
+              "line": 211,
+              "column": 9
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "notify": true
+            }
+          },
+          "defaultValue": "false"
+        },
+        {
+          "name": "disableSwipe",
+          "type": "boolean",
+          "description": "Boolean value to\nstate if swipe shoud\nwork",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 221,
+              "column": 8
+            },
+            "end": {
+              "line": 224,
+              "column": 9
+            }
+          },
+          "metadata": {
+            "polymer": {}
+          },
+          "defaultValue": "false"
+        },
+        {
+          "name": "hideNav",
+          "type": "boolean",
+          "description": "Boolean value to\nstate if nav should\nshould hidden",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 234,
+              "column": 8
+            },
+            "end": {
+              "line": 240,
+              "column": 9
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "notify": true,
+              "observer": "\"_reInit\""
+            }
+          },
+          "defaultValue": "false"
+        },
+        {
+          "name": "position",
+          "type": "number",
+          "description": "Number for storing start\nposition of slides",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 249,
+              "column": 8
+            },
+            "end": {
+              "line": 255,
+              "column": 9
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "notify": true,
+              "observer": "\"_posObs\""
+            }
+          },
+          "defaultValue": "0"
+        },
+        {
+          "name": "sensitivity",
+          "type": "string",
+          "description": "String to storing\nhigh, low or default\nswipe sensitivity",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 265,
+              "column": 8
+            },
+            "end": {
+              "line": 269,
+              "column": 9
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "notify": true
+            }
+          },
+          "defaultValue": "\"default\""
+        },
+        {
+          "name": "slideDuration",
+          "type": "number",
+          "description": "Number of seconds\neach slide should\nremain for",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 279,
+              "column": 8
+            },
+            "end": {
+              "line": 283,
+              "column": 9
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "notify": true
+            }
+          },
+          "defaultValue": "5"
+        },
+        {
+          "name": "totalSlides",
+          "type": "number",
+          "description": "Number for storing total\nnumber of slides",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 292,
+              "column": 8
+            },
+            "end": {
+              "line": 298,
+              "column": 9
+            }
+          },
+          "metadata": {
+            "polymer": {
+              "notify": true,
+              "observer": "\"_reInit\""
+            }
+          },
+          "defaultValue": "1"
+        }
+      ],
+      "methods": [
+        {
+          "name": "registered",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "bower_components/iron-a11y-keys-behavior/iron-a11y-keys-behavior.html",
+            "start": {
+              "line": 323,
+              "column": 6
+            },
+            "end": {
+              "line": 325,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [],
+          "inheritedFrom": "Polymer.IronA11yKeysBehavior"
+        },
+        {
+          "name": "attached",
+          "description": "Starting the scripts",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 575,
+              "column": 6
+            },
+            "end": {
+              "line": 593,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": []
+        },
+        {
+          "name": "detached",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "bower_components/iron-a11y-keys-behavior/iron-a11y-keys-behavior.html",
+            "start": {
+              "line": 331,
+              "column": 6
+            },
+            "end": {
+              "line": 333,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [],
+          "inheritedFrom": "Polymer.IronA11yKeysBehavior"
+        },
+        {
+          "name": "addOwnKeyBinding",
+          "description": "Can be used to imperatively add a key binding to the implementing\nelement. This is the imperative equivalent of declaring a keybinding\nin the `keyBindings` prototype property.",
+          "privacy": "public",
+          "sourceRange": {
+            "file": "bower_components/iron-a11y-keys-behavior/iron-a11y-keys-behavior.html",
+            "start": {
+              "line": 343,
+              "column": 6
+            },
+            "end": {
+              "line": 347,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "eventString",
+              "type": "string"
+            },
+            {
+              "name": "handlerName",
+              "type": "string"
+            }
+          ],
+          "inheritedFrom": "Polymer.IronA11yKeysBehavior"
+        },
+        {
+          "name": "removeOwnKeyBindings",
+          "description": "When called, will remove all imperatively-added key bindings.",
+          "privacy": "public",
+          "sourceRange": {
+            "file": "bower_components/iron-a11y-keys-behavior/iron-a11y-keys-behavior.html",
+            "start": {
+              "line": 352,
+              "column": 6
+            },
+            "end": {
+              "line": 356,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [],
+          "inheritedFrom": "Polymer.IronA11yKeysBehavior"
+        },
+        {
+          "name": "keyboardEventMatchesKeys",
+          "description": "Returns true if a keyboard event matches `eventString`.",
+          "privacy": "public",
+          "sourceRange": {
+            "file": "bower_components/iron-a11y-keys-behavior/iron-a11y-keys-behavior.html",
+            "start": {
+              "line": 365,
+              "column": 6
+            },
+            "end": {
+              "line": 373,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "event",
+              "type": "KeyboardEvent"
+            },
+            {
+              "name": "eventString",
+              "type": "string"
+            }
+          ],
+          "return": {
+            "type": "boolean"
+          },
+          "inheritedFrom": "Polymer.IronA11yKeysBehavior"
+        },
+        {
+          "name": "_collectKeyBindings",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "bower_components/iron-a11y-keys-behavior/iron-a11y-keys-behavior.html",
+            "start": {
+              "line": 375,
+              "column": 6
+            },
+            "end": {
+              "line": 385,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [],
+          "inheritedFrom": "Polymer.IronA11yKeysBehavior"
+        },
+        {
+          "name": "_prepKeyBindings",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "bower_components/iron-a11y-keys-behavior/iron-a11y-keys-behavior.html",
+            "start": {
+              "line": 387,
+              "column": 6
+            },
+            "end": {
+              "line": 408,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [],
+          "inheritedFrom": "Polymer.IronA11yKeysBehavior"
+        },
+        {
+          "name": "_addKeyBinding",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "bower_components/iron-a11y-keys-behavior/iron-a11y-keys-behavior.html",
+            "start": {
+              "line": 410,
+              "column": 6
+            },
+            "end": {
+              "line": 420,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "eventString"
+            },
+            {
+              "name": "handlerName"
+            }
+          ],
+          "inheritedFrom": "Polymer.IronA11yKeysBehavior"
+        },
+        {
+          "name": "_resetKeyEventListeners",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "bower_components/iron-a11y-keys-behavior/iron-a11y-keys-behavior.html",
+            "start": {
+              "line": 422,
+              "column": 6
+            },
+            "end": {
+              "line": 428,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [],
+          "inheritedFrom": "Polymer.IronA11yKeysBehavior"
+        },
+        {
+          "name": "_listenKeyEventListeners",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "bower_components/iron-a11y-keys-behavior/iron-a11y-keys-behavior.html",
+            "start": {
+              "line": 430,
+              "column": 6
+            },
+            "end": {
+              "line": 442,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [],
+          "inheritedFrom": "Polymer.IronA11yKeysBehavior"
+        },
+        {
+          "name": "_unlistenKeyEventListeners",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "bower_components/iron-a11y-keys-behavior/iron-a11y-keys-behavior.html",
+            "start": {
+              "line": 444,
+              "column": 6
+            },
+            "end": {
+              "line": 459,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [],
+          "inheritedFrom": "Polymer.IronA11yKeysBehavior"
+        },
+        {
+          "name": "_onKeyBindingEvent",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "bower_components/iron-a11y-keys-behavior/iron-a11y-keys-behavior.html",
+            "start": {
+              "line": 461,
+              "column": 6
+            },
+            "end": {
+              "line": 482,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "keyBindings"
+            },
+            {
+              "name": "event"
+            }
+          ],
+          "inheritedFrom": "Polymer.IronA11yKeysBehavior"
+        },
+        {
+          "name": "_triggerKeyHandler",
+          "description": "",
+          "privacy": "protected",
+          "sourceRange": {
+            "file": "bower_components/iron-a11y-keys-behavior/iron-a11y-keys-behavior.html",
+            "start": {
+              "line": 484,
+              "column": 6
+            },
+            "end": {
+              "line": 495,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "keyCombo"
+            },
+            {
+              "name": "handlerName"
+            },
+            {
+              "name": "keyboardEvent"
+            }
+          ],
+          "inheritedFrom": "Polymer.IronA11yKeysBehavior"
+        },
+        {
+          "name": "_animateCSS",
+          "description": "Method for styling\nand animating dots",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 316,
+              "column": 6
+            },
+            "end": {
+              "line": 325,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": []
+        },
+        {
+          "name": "_ariaChecked",
+          "description": "Method for setting\nthe aria-checked property\nof dotElems on position change",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 332,
+              "column": 6
+            },
+            "end": {
+              "line": 340,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": []
+        },
+        {
+          "name": "_autoProceed",
+          "description": "Method for moving\nautomatically ever\nslideDuration seconds",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 347,
+              "column": 6
+            },
+            "end": {
+              "line": 360,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": []
+        },
+        {
+          "name": "_createDots",
+          "description": "Create the nav dots,\n1 for each slide",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 366,
+              "column": 6
+            },
+            "end": {
+              "line": 372,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "t"
+            }
+          ]
+        },
+        {
+          "name": "_keyLeft",
+          "description": "Method for moving\nto the previous slide or\nto the last slide\nand setting focus",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 380,
+              "column": 6
+            },
+            "end": {
+              "line": 385,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": []
+        },
+        {
+          "name": "_keyRight",
+          "description": "Method for moving\nto the next slide or back\nto the first slide\nand setting focus",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 393,
+              "column": 6
+            },
+            "end": {
+              "line": 398,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": []
+        },
+        {
+          "name": "_moveInd",
+          "description": "Method to initiate\nand animate move",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 404,
+              "column": 6
+            },
+            "end": {
+              "line": 417,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "dotElem"
+            }
+          ]
+        },
+        {
+          "name": "_moveManual",
+          "description": "Adds onclick listener\nTo update the position",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 423,
+              "column": 6
+            },
+            "end": {
+              "line": 435,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": []
+        },
+        {
+          "name": "_posObs",
+          "description": "Function to store\nfunctions for the\nposition observer",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 442,
+              "column": 6
+            },
+            "end": {
+              "line": 447,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": []
+        },
+        {
+          "name": "_reInit",
+          "description": "Method to reinitialise\non totalSlides change.",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 453,
+              "column": 6
+            },
+            "end": {
+              "line": 459,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": []
+        },
+        {
+          "name": "_setInert",
+          "description": "Method for setting\ninert on hidden slides",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 464,
+              "column": 6
+            },
+            "end": {
+              "line": 475,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": []
+        },
+        {
+          "name": "_spaceCatcher",
+          "description": "Method for moving\nto the selected slide\non key press",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 482,
+              "column": 6
+            },
+            "end": {
+              "line": 492,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "e"
+            }
+          ]
+        },
+        {
+          "name": "_swipeHandler",
+          "description": "Method for adding\nswipe event handler",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 497,
+              "column": 6
+            },
+            "end": {
+              "line": 523,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "e"
+            }
+          ]
+        },
+        {
+          "name": "moveFocus",
+          "description": "Method for moving\nfocus to a different\ndot.",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 533,
+              "column": 6
+            },
+            "end": {
+              "line": 536,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "slide"
+            }
+          ]
+        },
+        {
+          "name": "moveNext",
+          "description": "Method for moving\nto the next slide or back\nto the first slide",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 543,
+              "column": 6
+            },
+            "end": {
+              "line": 547,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": []
+        },
+        {
+          "name": "movePos",
+          "description": "Method for moving\nto a specific slide",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 553,
+              "column": 6
+            },
+            "end": {
+              "line": 556,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "slide"
+            }
+          ]
+        },
+        {
+          "name": "movePrev",
+          "description": "Method for moving\nto the previous slide or\nto the last slide",
+          "privacy": "public",
+          "sourceRange": {
+            "start": {
+              "line": 563,
+              "column": 6
+            },
+            "end": {
+              "line": 567,
+              "column": 7
+            }
+          },
+          "metadata": {},
+          "params": []
+        }
+      ],
+      "staticMethods": [],
+      "demos": [
+        {
+          "url": "demo/index.html",
+          "description": ""
+        }
+      ],
+      "metadata": {},
+      "sourceRange": {
+        "start": {
+          "line": 152,
+          "column": 12
+        },
+        "end": {
+          "line": 594,
+          "column": 5
+        }
+      },
+      "privacy": "public",
+      "superclass": "HTMLElement",
+      "attributes": [
+        {
+          "name": "key-event-target",
+          "description": "The EventTarget that will be firing relevant KeyboardEvents. Set it to\n`null` to disable the listeners.",
+          "sourceRange": {
+            "file": "bower_components/iron-a11y-keys-behavior/iron-a11y-keys-behavior.html",
+            "start": {
+              "line": 278,
+              "column": 8
+            },
+            "end": {
+              "line": 283,
+              "column": 9
+            }
+          },
+          "metadata": {},
+          "type": "?EventTarget",
+          "inheritedFrom": "Polymer.IronA11yKeysBehavior"
+        },
+        {
+          "name": "stop-keyboard-event-propagation",
+          "description": "If true, this property will cause the implementing element to\nautomatically stop propagation on any handled KeyboardEvents.",
+          "sourceRange": {
+            "file": "bower_components/iron-a11y-keys-behavior/iron-a11y-keys-behavior.html",
+            "start": {
+              "line": 289,
+              "column": 8
+            },
+            "end": {
+              "line": 292,
+              "column": 9
+            }
+          },
+          "metadata": {},
+          "type": "boolean",
+          "inheritedFrom": "Polymer.IronA11yKeysBehavior"
+        },
+        {
+          "name": "auto-progress",
+          "description": "Boolean value to\nstate if slides should\nauto proceed",
+          "sourceRange": {
+            "start": {
+              "line": 207,
+              "column": 8
+            },
+            "end": {
+              "line": 211,
+              "column": 9
+            }
+          },
+          "metadata": {},
+          "type": "boolean"
+        },
+        {
+          "name": "disable-swipe",
+          "description": "Boolean value to\nstate if swipe shoud\nwork",
+          "sourceRange": {
+            "start": {
+              "line": 221,
+              "column": 8
+            },
+            "end": {
+              "line": 224,
+              "column": 9
+            }
+          },
+          "metadata": {},
+          "type": "boolean"
+        },
+        {
+          "name": "hide-nav",
+          "description": "Boolean value to\nstate if nav should\nshould hidden",
+          "sourceRange": {
+            "start": {
+              "line": 234,
+              "column": 8
+            },
+            "end": {
+              "line": 240,
+              "column": 9
+            }
+          },
+          "metadata": {},
+          "type": "boolean"
+        },
+        {
+          "name": "position",
+          "description": "Number for storing start\nposition of slides",
+          "sourceRange": {
+            "start": {
+              "line": 249,
+              "column": 8
+            },
+            "end": {
+              "line": 255,
+              "column": 9
+            }
+          },
+          "metadata": {},
+          "type": "number"
+        },
+        {
+          "name": "sensitivity",
+          "description": "String to storing\nhigh, low or default\nswipe sensitivity",
+          "sourceRange": {
+            "start": {
+              "line": 265,
+              "column": 8
+            },
+            "end": {
+              "line": 269,
+              "column": 9
+            }
+          },
+          "metadata": {},
+          "type": "string"
+        },
+        {
+          "name": "slide-duration",
+          "description": "Number of seconds\neach slide should\nremain for",
+          "sourceRange": {
+            "start": {
+              "line": 279,
+              "column": 8
+            },
+            "end": {
+              "line": 283,
+              "column": 9
+            }
+          },
+          "metadata": {},
+          "type": "number"
+        },
+        {
+          "name": "total-slides",
+          "description": "Number for storing total\nnumber of slides",
+          "sourceRange": {
+            "start": {
+              "line": 292,
+              "column": 8
+            },
+            "end": {
+              "line": 298,
+              "column": 9
+            }
+          },
+          "metadata": {},
+          "type": "number"
+        }
+      ],
+      "events": [
+        {
+          "type": "CustomEvent",
+          "name": "auto-progress-changed",
+          "description": "Fired when the `autoProgress` property changes.",
+          "metadata": {}
+        },
+        {
+          "type": "CustomEvent",
+          "name": "hide-nav-changed",
+          "description": "Fired when the `hideNav` property changes.",
+          "metadata": {}
+        },
+        {
+          "type": "CustomEvent",
+          "name": "position-changed",
+          "description": "Fired when the `position` property changes.",
+          "metadata": {}
+        },
+        {
+          "type": "CustomEvent",
+          "name": "sensitivity-changed",
+          "description": "Fired when the `sensitivity` property changes.",
+          "metadata": {}
+        },
+        {
+          "type": "CustomEvent",
+          "name": "slide-duration-changed",
+          "description": "Fired when the `slideDuration` property changes.",
+          "metadata": {}
+        },
+        {
+          "type": "CustomEvent",
+          "name": "total-slides-changed",
+          "description": "Fired when the `totalSlides` property changes.",
+          "metadata": {}
+        }
+      ],
+      "styling": {
+        "cssVariables": [],
+        "selectors": []
+      },
+      "slots": [
+        {
+          "description": "",
+          "name": "",
+          "range": {
+            "file": "l2t-paper-slider.html",
+            "start": {
+              "line": 139,
+              "column": 8
+            },
+            "end": {
+              "line": 139,
+              "column": 21
+            }
+          }
+        }
+      ],
+      "tagname": "l2t-paper-slider"
+    }
+  ]
+}
