@@ -8,7 +8,7 @@
   ### Examples
   Each slide must be within a paper-slide tag, but other than that you have complete control.
 
-      <l2t-paper-slider total-slides="4">
+      <l2t-paper-slider>
         <paper-slide>#1</paper-slide>
         <paper-slide>#2</paper-slide>
         <paper-slide>#3</paper-slide>
@@ -288,7 +288,7 @@ Custom property | Description | Default
         *
         * @attribute total-slides
         * @type Number
-        * @default 1
+        * @default NULL
         */
         totalSlides: {
           type: Number,
@@ -358,6 +358,11 @@ Custom property | Description | Default
           }, (this$.slideDuration * 1000));
         });
       },
+      /**
+      * Count the slides,
+      * and set totalSlides
+      *
+      */
       _countSlides: function() {
         let totalSlides = this.$.container.querySelectorAll('paper-slide').length;
         this.totalSlides = totalSlides;
