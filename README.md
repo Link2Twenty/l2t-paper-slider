@@ -140,14 +140,13 @@ The following custom properties are available for styling:
 
 | Attribute Name | Functionality | Type | Default |
 |----------------|-------------|-------------|-------------|
-| totalSlides* | Number for storing total number of slides | Number | 1 |
+| totalSlides | Number for storing total number of slides | Number | NULL |
 | autoProgress | Boolean value to state if slides should auto proceed | Boolean | false |
 | slideDuration | Number of seconds each slide should remain for | Number | 5 |
 | hideNav | Boolean value to state if nav should should hidden | Boolean | false |
 | position | Number for storing start position of slides | Number | 0 |
 | disableSwipe | Boolean value to state if swipe shoud work | Boolean | false |
 | sensitivity | String to storing high, low or default swipe sensitivity | String | 'default' |
-required*
 
 ### Private
 
