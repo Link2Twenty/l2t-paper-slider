@@ -42,7 +42,7 @@ Each slide must be within a paper-slide tag, but other than that you have comple
 ```
 -->
 ```html
-  <l2t-paper-slider total-slides="4">
+  <l2t-paper-slider>
     <paper-slide>#1</paper-slide>
     <paper-slide>#2</paper-slide>
     <paper-slide>#3</paper-slide>
@@ -78,7 +78,7 @@ There is also auto progression and slide duration for how long it should remain 
 ```
 -->
 ```html
-  <l2t-paper-slider auto-progress slide-duration="2" total-slides="3">
+  <l2t-paper-slider auto-progress slide-duration="2">
     <paper-slide>#1</paper-slide>
     <paper-slide>#2</paper-slide>
     <paper-slide>#3</paper-slide>
@@ -113,7 +113,7 @@ You can set a different default start position, the first start postion is 0 (as
 ```
 -->
 ```html
-  <l2t-paper-slider total-slides="2" position="1">
+  <l2t-paper-slider position="1">
     <paper-slide>#1</paper-slide>
     <paper-slide>#2</paper-slide>
   </l2t-paper-slider>
