@@ -594,7 +594,7 @@ Custom property | Description | Default
           Polymer.Gestures.addListener(this.$.container, 'track', e => this._swipeHandler(e));
         }
         this.setScrollDirection('y', this.$.container);
-        _countSlides();
+        this._countSlides();
       },
     });
   })();
