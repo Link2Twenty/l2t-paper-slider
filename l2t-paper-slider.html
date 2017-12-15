@@ -364,8 +364,8 @@ Custom property | Description | Default
       *
       */
       _countSlides: function() {
-        let totalSlides = this.$.container.querySelectorAll('paper-slide').length;
-        this.totalSlides = totalSlides;
+        let deep = Polymer.version>="2"?this:this.$.container;
+        this.totalSlides = deep.querySelectorAll("paper-slide").length;
       },
       /**
       * Create the nav dots,
