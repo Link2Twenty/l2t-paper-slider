@@ -292,7 +292,6 @@ Custom property | Description | Default
         */
         totalSlides: {
           type: Number,
-          value: 1,
           notify: true,
           reflectToAttribute: true,
           observer: '_reInit'
@@ -358,6 +357,10 @@ Custom property | Description | Default
             this$.moveNext();
           }, (this$.slideDuration * 1000));
         });
+      },
+      _countSlides: function() {
+        let totalSlides = this.$.container.querySelectorAll('paper-slide').length;
+        this.totalSlides = totalSlides;
       },
       /**
       * Create the nav dots,
@@ -591,6 +594,7 @@ Custom property | Description | Default
           Polymer.Gestures.addListener(this.$.container, 'track', e => this._swipeHandler(e));
         }
         this.setScrollDirection('y', this.$.container);
+        _countSlides();
       },
     });
   })();
