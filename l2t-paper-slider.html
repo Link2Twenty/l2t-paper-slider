@@ -592,6 +592,7 @@ Custom property | Description | Default
         setTimeout(function(){
           this$._moveManual();
           this$._ariaChecked();
+          this$._countSlides();
         }, 0);
 
         //allow vertical scrolling
@@ -599,7 +600,6 @@ Custom property | Description | Default
           Polymer.Gestures.addListener(this.$.container, 'track', e => this._swipeHandler(e));
         }
         this.setScrollDirection('y', this.$.container);
-        this._countSlides();
       },
     });
   })();
