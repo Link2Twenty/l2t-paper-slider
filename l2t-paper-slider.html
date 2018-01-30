@@ -43,6 +43,7 @@ Custom property | Description | Default
 `--paper-slider-dot-container-styles` | (Mixin) Custom styles for dot container | NULL
 `--paper-slide-dot-styles` | (Mixin) Custon styles for dots | NULL
 `--paper-slide-background` | Default background color for slides | `rgba(0,0,0,0)`
+`--paper-slide-font-size` | Default font size for slide | `medium`
 
   @element l2t-paper-slider
   @demo demo/index.html
@@ -126,7 +127,7 @@ Custom property | Description | Default
         height: var(--paper-slide-height, 600px);
       }
       .slider__slides ::slotted(*) {
-        font-size: medium;
+        font-size: var(--paper-slide-font-size, medium);
       }
       .slider__slides ::slotted(paper-slide) {
         width: var(--paper-slide-width, 100%);
