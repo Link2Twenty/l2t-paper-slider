@@ -133,6 +133,7 @@ The following custom properties are available for styling:
 | --paper-slider-dot-container-styles | (Mixin) Custom styles for dot container | NULL |
 | --paper-slide-dot-styles | (Mixin) Custom styles for dot | NULL |
 | --paper-slide-background | Default background color for slides | rgba(0, 0, 0, 0) |
+| --paper-slide-font-size | Default font size for slide | medium
 
 ## Attributes
 
