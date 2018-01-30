@@ -23,11 +23,11 @@ Each slide must be within a paper-slide tag, but other than that you have comple
     <style is="custom-style">
       l2t-paper-slider {
         --paper-slide-height: 200px;
+	--paper-slide-font-size: 64px;
       }
       
       paper-slide {
         line-height: 200px;
-        font-size: 64px;
         text-align: center;
         vertical-align: middle;
 	color: white;
