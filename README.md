@@ -1,3 +1,7 @@
+[![Published on Vaadin  Directory](https://img.shields.io/badge/Vaadin%20Directory-published-00b4f0.svg)](https://vaadin.com/directory/component/Link2Twentyl2t-paper-slider)
+[![Stars on vaadin.com/directory](https://img.shields.io/vaadin-directory/star/Link2Twentyl2t-paper-slider.svg)](https://vaadin.com/directory/component/Link2Twentyl2t-paper-slider)
+
+
 # < l2t-paper-slider >
 
 Polymer element for displaying slides in a carousel. 
