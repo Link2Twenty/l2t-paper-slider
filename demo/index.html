@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=no">
   <meta name="theme-color" content="#003366">
   <script src="/node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
-  <script type="module" src="../l2t-paper-slider.js"></script>
+  <script type="module" src="/l2t-paper-slider.js"></script>
   <script type="module" src="/node_modules/@polymer/paper-button/paper-button.js"></script>
   <script type="module" src="/node_modules/@polymer/iron-demo-helpers/demo-snippet.js"></script>
   <custom-style>
@@ -306,10 +306,7 @@
   <demo-snippet>
     <b>Javascript</b> (To make the buttons tidier)
     <template>
-      <script type="module">
-        import '../l2t-paper-slider.js';
-        import '@polymer/paper-button/paper-button.js';
-        import '@polymer/iron-demo-helpers/demo-snippet.js';
+      <script>
         function addSlide() {
           var selector = document.querySelector('.reinit-demo');
           var node = document.createElement("paper-slide");
@@ -317,13 +314,13 @@
           node.appendChild(textnode);
           node.classList.add('paper-slide-green');
           node.classList.add('demo-style');
-          selector.querySelector('#container').querySelector(".slider__slides").appendChild(node);
+          selector.shadowRoot.querySelector('#container').querySelector(".slider__slides").appendChild(node);
           ++selector.totalSlides;
         }
 
         function remSlide() {
           var selector = document.querySelector('.reinit-demo');
-          var slides = selector.querySelector('#container').querySelector(".slider__slides");
+          var slides = selector.shadowRoot.querySelector('#container').querySelector(".slider__slides");
           var lastSlide = slides.lastElementChild;
           slides.removeChild(lastSlide);
           --selector.totalSlides;

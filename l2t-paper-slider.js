@@ -62,7 +62,7 @@ Polymer$0({
         white-space: nowrap;
         @apply --paper-slider-styles;
       }
-    
+
       .slider__slides {
         position: relative;
         font-size: 0;
@@ -71,14 +71,14 @@ Polymer$0({
         background: var(--paper-slide-background, rgba(0, 0, 0, 0));
         will-change: transform;
       }
-    
+
       .slider__slides.mouseup {
         -webkit-transition: -webkit-transform .3s cubic-bezier(.51, .92, .24, 1);
         transition: -webkit-transform .3s cubic-bezier(.51, .92, .24, 1);
         transition: transform .3s cubic-bezier(.51, .92, .24, 1);
         transition: transform .3s cubic-bezier(.51, .92, .24, 1), -webkit-transform .3s cubic-bezier(.51, .92, .24, 1);
       }
-    
+
       .slider__dots {
         display: -webkit-box;
         display: -webkit-flex;
@@ -91,11 +91,11 @@ Polymer$0({
         transform: translateX(-50%);
         @apply --paper-slider-dot-container-styles;
       }
-    
+
       *[hidden] {
         display: none;
       }
-    
+
       .slider__dot,
       .slider__indicator {
         display: block;
@@ -107,12 +107,12 @@ Polymer$0({
         cursor: pointer;
         @apply --paper-slide-dot-styles;
       }
-    
+
       .slider__dot:focus {
         outline: none;
         box-shadow: 0 0 7px 1px var(--paper-slide-dot, rgba(255, 255, 255, .5));
       }
-    
+
       .slider__indicator {
         -webkit-transition: opacity .5s .1s cubic-bezier(.51, .92, .24, 1.15);
         transition: opacity .5s .1s cubic-bezier(.51, .92, .24, 1.15);
@@ -123,26 +123,26 @@ Polymer$0({
         opacity: 0;
         width: auto;
       }
-    
+
       .slider__indicator--left {
         -webkit-transition: left .3s cubic-bezier(.51, .92, .24, 1.15), right .3s .1s cubic-bezier(.51, .92, .24, 1.15);
         transition: left .3s cubic-bezier(.51, .92, .24, 1.15), right .3s .1s cubic-bezier(.51, .92, .24, 1.15);
       }
-    
+
       .slider__indicator--right {
         -webkit-transition: left .3s .1s cubic-bezier(.51, .92, .24, 1.15), right .3s cubic-bezier(.51, .92, .24, 1.15);
         transition: left .3s .1s cubic-bezier(.51, .92, .24, 1.15), right .3s cubic-bezier(.51, .92, .24, 1.15);
       }
-    
+
       .slider {
         width: var(--paper-slide-width, 100%);
         height: var(--paper-slide-height, 600px);
       }
-    
+
       .slider__slides ::slotted(*) {
         font-size: var(--paper-slide-font-size, medium);
       }
-    
+
       .slider__slides ::slotted(paper-slide) {
         width: var(--paper-slide-width, 100%);
         height: var(--paper-slide-height, 600px);
@@ -383,8 +383,7 @@ Polymer$0({
   *
   */
   _countSlides: function () {
-    let deep = Polymer.version >= "2" ? this : this.$.container;
-    this.totalSlides = deep.querySelectorAll("paper-slide").length;
+    this.totalSlides = this.querySelectorAll("paper-slide").length;
   },
 
   /**
@@ -628,9 +627,7 @@ Polymer$0({
     }, 0);
 
     //allow vertical scrolling
-    if (Polymer.version >= "2") {
-      addListener(this.$.container, 'track', e => this._swipeHandler(e));
-    }
+    addListener(this.$.container, 'track', e => this._swipeHandler(e));
     this.setScrollDirection('y', this.$.container);
   }
 });
