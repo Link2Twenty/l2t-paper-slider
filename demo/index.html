@@ -1,298 +1,346 @@
 <html>
-  <head>
-    <title>l2t-paper-slider</title>
-    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=no">
-    <meta name="theme-color" content="#003366">
-    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-    <link rel="import" href="../l2t-paper-slider.html">
-    <link rel="import" href="../../paper-button/paper-button.html">
-    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
-    <custom-style>
-      <style is="custom-style">
-        .styledDots {
-          --paper-slide-width: 300px;
-          --paper-slide-height: 150px;
-          --paper-slide-dot: rgba(120,144,156 ,.8);
-          --paper-slide-dot-selected: rgba(38,50,56 ,1);
-          --paper-slide-dot-styles: {
-            width: 24px;
-            height: 8px;
-            margin: 6px;
-            border-width: 4px;
-            border-style: inset;
-            border-color: #ccc;
-            padding: 2px;
-            box-shadow: inset 0 0 5px 1px rgba(0,0,0,0.6);
-          }
-          l2t-paper-slider {
-            --paper-slide-font-size: 64px;
-          }
+
+<head>
+  <title>l2t-paper-slider</title>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#003366">
+  <script src="/node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+  <script type="module" src="/l2t-paper-slider.js"></script>
+  <script type="module" src="/node_modules/@polymer/paper-button/paper-button.js"></script>
+  <script type="module" src="/node_modules/@polymer/iron-demo-helpers/demo-snippet.js"></script>
+  <custom-style>
+    <style is="custom-style">
+      .styledDots {
+        --paper-slide-width: 300px;
+        --paper-slide-height: 150px;
+        --paper-slide-dot: rgba(120, 144, 156, .8);
+        --paper-slide-dot-selected: rgba(38, 50, 56, 1);
+        --paper-slide-dot-styles: {
+          width: 24px;
+          height: 8px;
+          margin: 6px;
+          border-width: 4px;
+          border-style: inset;
+          border-color: #ccc;
+          padding: 2px;
+          box-shadow: inset 0 0 5px 1px rgba(0, 0, 0, 0.6);
         }
-      </style>
-    </custom-style>
-    <style>
-      body {
-        font-family: 'Roboto', sans-serif;
-        text-align: center;
-      }
-      .container {
-        width: 300px;
-        height: 300px;
-        margin: 20px auto;
-        border: 1px solid rgba(0, 0, 0, 0.5);
-      }
-      .half-height {
-        height: 150px;
-      }
-      .container paper-button.proceed:last-child {
-        float: right;
-      }
-      .demo-style {
-        text-align: center;
-        vertical-align: middle;
-        line-height: 600px;
-        color: #fff;
-        font-weight: bolder
-      }
-      .paper-slide-blue {
-        background: #2196F3
-      }
-      .paper-slide-red {
-        background: #F44336
-      }
-      .paper-slide-brown {
-        background: #795548
-      }
-      .paper-slide-green {
-        background: #009688
-      }
-      .button-flex {
-        display: flex;
-      }
-      .button-flex > paper-button {
-        flex: 1;
-      }
-      demo-snippet {
-        width: 768px;
-        margin: 0 auto;
-        text-align: left;
-      }
-      @media screen and (max-width: 768px) {
-        demo-snippet {
-          width: 100%;
+        l2t-paper-slider {
+          --paper-slide-font-size: 64px;
         }
       }
     </style>
-  </head>
-  <body>
-    <demo-snippet><b>Out of the box:</b><br><br>
-      <template>
-        <l2t-paper-slider>
-          <paper-slide class="paper-slide-blue demo-style">#1</paper-slide>
-          <paper-slide class="paper-slide-red demo-style">#2</paper-slide>
-          <paper-slide class="paper-slide-brown demo-style">#3</paper-slide>
-          <paper-slide class="paper-slide-green demo-style">#4</paper-slide>
+  </custom-style>
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      text-align: center;
+    }
+
+    .container {
+      width: 300px;
+      height: 300px;
+      margin: 20px auto;
+      border: 1px solid rgba(0, 0, 0, 0.5);
+    }
+
+    .half-height {
+      height: 150px;
+    }
+
+    .container paper-button.proceed:last-child {
+      float: right;
+    }
+
+    .demo-style {
+      text-align: center;
+      vertical-align: middle;
+      line-height: 600px;
+      color: #fff;
+      font-weight: bolder
+    }
+
+    .paper-slide-blue {
+      background: #2196F3
+    }
+
+    .paper-slide-red {
+      background: #F44336
+    }
+
+    .paper-slide-brown {
+      background: #795548
+    }
+
+    .paper-slide-green {
+      background: #009688
+    }
+
+    .button-flex {
+      display: flex;
+    }
+
+    .button-flex>paper-button {
+      flex: 1;
+    }
+
+    demo-snippet {
+      width: 768px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    @media screen and (max-width: 768px) {
+      demo-snippet {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <demo-snippet>
+    <b>Out of the box:</b>
+    <br>
+    <br>
+    <template>
+      <l2t-paper-slider>
+        <paper-slide class="paper-slide-blue demo-style">#1</paper-slide>
+        <paper-slide class="paper-slide-red demo-style">#2</paper-slide>
+        <paper-slide class="paper-slide-brown demo-style">#3</paper-slide>
+        <paper-slide class="paper-slide-green demo-style">#4</paper-slide>
+      </l2t-paper-slider>
+    </template>
+  </demo-snippet>
+  <br>
+  <br>
+  <demo-snippet>
+    <b>Example with Swipe disabled:</b>
+    <br>
+    <br>
+    <template>
+      <div class="container">
+        <l2t-paper-slider disable-swipe class="swipeDis">
+          <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=C5CAE9&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
+          <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=FFF9C4&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
+          <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=DCEDC8&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
+          <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=FFCCBC&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
+          <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=FFF9C4&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
+          <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=DCEDC8&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
         </l2t-paper-slider>
-      </template>
-    </demo-snippet>
-    <br><br>
-    <demo-snippet><b>Example with Swipe disabled:</b><br><br>
-      <template>
-        <div class="container">
-          <l2t-paper-slider disable-swipe class="swipeDis">
-            <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=C5CAE9&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
-            <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=FFF9C4&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
-            <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=DCEDC8&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
-            <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=FFCCBC&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
-            <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=FFF9C4&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
-            <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=DCEDC8&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
-          </l2t-paper-slider>
-        </div>
-      </template>
-    </demo-snippet>
-    <demo-snippet><b>Styling:</b> (This needs to be in the head section)
-      <template>
-        <custom-style>
-          <style is="custom-style">
-            .swipeDis {
-              --paper-slide-width: 300px;
-              --paper-slide-height: 300px;
-              --paper-slide-dot: rgba(120,144,156 ,.8);
-              --paper-slide-dot-selected: rgba(38,50,56 ,1);
+      </div>
+    </template>
+  </demo-snippet>
+  <demo-snippet>
+    <b>Styling:</b> (This needs to be in the head section)
+    <template>
+      <custom-style>
+        <style is="custom-style">
+          .swipeDis {
+            --paper-slide-width: 300px;
+            --paper-slide-height: 300px;
+            --paper-slide-dot: rgba(120, 144, 156, .8);
+            --paper-slide-dot-selected: rgba(38, 50, 56, 1);
+          }
+        </style>
+      </custom-style>
+    </template>
+  </demo-snippet>
+  <br>
+  <br>
+  <demo-snippet>
+    <b>Example with 'dots' Hidden and external navigation:</b>
+    <br>
+    <br>
+    <template>
+      <div class="container">
+        <l2t-paper-slider hide-nav class="exNav">
+          <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=C5CAE9&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
+          <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=BBDEFB&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
+          <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=DCEDC8&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
+        </l2t-paper-slider>
+        <paper-button onclick="document.querySelector('.exNav').movePos(0)">1</paper-button>
+        <paper-button onclick="document.querySelector('.exNav').movePos(1)">2</paper-button>
+        <paper-button onclick="document.querySelector('.exNav').movePos(2)">3</paper-button>
+      </div>
+    </template>
+  </demo-snippet>
+  <demo-snippet>
+    <b>Styling:</b> (This needs to be in the head section)
+    <template>
+      <custom-style>
+        <style is="custom-style">
+          .exNav {
+            --paper-slide-width: 300px;
+            --paper-slide-height: 300px;
+          }
+        </style>
+      </custom-style>
+    </template>
+  </demo-snippet>
+  <br>
+  <br>
+  <demo-snippet>
+    <b>Example with styled 'dots':</b>
+    <br>
+    <br>
+    <template>
+      <div class="container half-height">
+        <l2t-paper-slider class="styledDots">
+          <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=C5CAE9&txtclr=212121&txt=300%C3%97150&w=300&h=150&fm=png');"></paper-slide>
+          <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=BBDEFB&txtclr=212121&txt=300%C3%97150&w=300&h=150&fm=png');"></paper-slide>
+          <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=DCEDC8&txtclr=212121&txt=300%C3%97150&w=300&h=150&fm=png');"></paper-slide>
+        </l2t-paper-slider>
+      </div>
+    </template>
+  </demo-snippet>
+  <demo-snippet>
+    <b>Styling:</b> (This needs to be in the head section)
+    <template>
+      <custom-style>
+        <style is="custom-style">
+          .styledDots {
+            --paper-slide-width: 300px;
+            --paper-slide-height: 150px;
+            --paper-slide-dot: rgba(120, 144, 156, .8);
+            --paper-slide-dot-selected: rgba(38, 50, 56, 1);
+            --paper-slide-dot-styles: {
+              width: 24px;
+              height: 8px;
+              margin: 6px;
+              border-width: 4px;
+              border-style: inset;
+              border-color: #ccc;
+              padding: 2px;
+              box-shadow: inset 0 0 5px 1px rgba(0, 0, 0, 0.6);
             }
-          </style>
-        </custom-style>
-      </template>
-    </demo-snippet>
-    <br><br>
-    <demo-snippet><b>Example with 'dots' Hidden and external navigation:</b><br><br>
-      <template>
-        <div class="container">
-          <l2t-paper-slider hide-nav class="exNav">
-            <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=C5CAE9&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
-            <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=BBDEFB&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
-            <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=DCEDC8&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
-          </l2t-paper-slider>
-          <paper-button onclick="document.querySelector('.exNav').movePos(0)">1</paper-button>
-          <paper-button onclick="document.querySelector('.exNav').movePos(1)">2</paper-button>
-          <paper-button onclick="document.querySelector('.exNav').movePos(2)">3</paper-button>
-        </div>
-      </template>
-    </demo-snippet>
-    <demo-snippet><b>Styling:</b> (This needs to be in the head section)
-      <template>
-        <custom-style>
-          <style is="custom-style">
-            .exNav {
-              --paper-slide-width: 300px;
-              --paper-slide-height: 300px;
-            }
-          </style>
-        </custom-style>
-      </template>
-    </demo-snippet>
-        <br><br>
-    <demo-snippet><b>Example with styled 'dots':</b><br><br>
-      <template>
-        <div class="container half-height">
-          <l2t-paper-slider class="styledDots">
-            <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=C5CAE9&txtclr=212121&txt=300%C3%97150&w=300&h=150&fm=png');"></paper-slide>
-            <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=BBDEFB&txtclr=212121&txt=300%C3%97150&w=300&h=150&fm=png');"></paper-slide>
-            <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=DCEDC8&txtclr=212121&txt=300%C3%97150&w=300&h=150&fm=png');"></paper-slide>
-          </l2t-paper-slider>
-        </div>
-      </template>
-    </demo-snippet>
-    <demo-snippet><b>Styling:</b> (This needs to be in the head section)
-      <template>
-        <custom-style>
-          <style is="custom-style">
-            .styledDots {
-              --paper-slide-width: 300px;
-              --paper-slide-height: 150px;
-              --paper-slide-dot: rgba(120,144,156 ,.8);
-              --paper-slide-dot-selected: rgba(38,50,56 ,1);
-              --paper-slide-dot-styles: {
-                width: 24px;
-                height: 8px;
-                margin: 6px;
-                border-width: 4px;
-                border-style: inset;
-                border-color: #ccc;
-                padding: 2px;
-                box-shadow: inset 0 0 5px 1px rgba(0,0,0,0.6);
-              }
-            }
-          </style>
-        </custom-style>
-      </template>
-    </demo-snippet>
-    <br><br>
-    <demo-snippet><b>Example with auto progression:</b><br><br>
+          }
+        </style>
+      </custom-style>
+    </template>
+  </demo-snippet>
+  <br>
+  <br>
+  <demo-snippet>
+    <b>Example with auto progression:</b>
+    <br>
+    <br>
     <b>Notes:</b> Slides pause on mouse over
-      <template>
-        <div class="container">
-          <l2t-paper-slider auto-progress slide-duration="2" class="custom">
-            <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=FFF9C4&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
-            <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=FFCCBC&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
-          </l2t-paper-slider>
-        </div>
-      </template>
-    </demo-snippet>
-    <demo-snippet><b>Styling:</b> (This needs to be in the head section)
-      <template>
-        <custom-style>
-          <style is="custom-style">
-            .custom {
-              --paper-slide-width: 300px;
-              --paper-slide-height: 300px;
-              --paper-slide-dot: rgba(120,144,156 ,.8);
-              --paper-slide-dot-selected: rgba(38,50,56 ,1);
-            }
-          </style>
-        </custom-style>
-      </template>
-    </demo-snippet>
-    <br><br>
-    <demo-snippet><b>Example with button controls and position tag:</b><br><br>
-      <template>
-        <div class="container">
-          <l2t-paper-slider class="moveControl" position="2">
-            <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=C5CAE9&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
-            <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=FFF9C4&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
-            <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=DCEDC8&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
-            <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=FFCCBC&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
-          </l2t-paper-slider>
-          <paper-button class="proceed" onclick="document.querySelector('.moveControl').movePrev();">Previous</paper-button>
-          <paper-button class="proceed" onclick="document.querySelector('.moveControl').moveNext();">Next</paper-button>
-        </div>
-      </template>
-    </demo-snippet>
-    <demo-snippet><b>Styling:</b> (This needs to be in the head section)
-      <template>
-        <custom-style>
-          <style is="custom-style">
-            .moveControl {
-              --paper-slide-width: 300px;
-              --paper-slide-height: 300px;
-              --paper-slide-dot: rgba(120,144,156 ,.8);
-              --paper-slide-dot-selected: rgba(38,50,56 ,1);
-            }
-          </style>
-        </custom-style>
-      </template>
-    </demo-snippet>
-    <br><br>
-    <demo-snippet><b>Updating your slides on the fly:</b><br><br>
-      <template>
-        <l2t-paper-slider class="reinit-demo">
-          <paper-slide class="paper-slide-green demo-style">#1</paper-slide>
-          <paper-slide class="paper-slide-green demo-style">#2</paper-slide>
+    <template>
+      <div class="container">
+        <l2t-paper-slider auto-progress slide-duration="2" class="custom">
+          <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=FFF9C4&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
+          <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=FFCCBC&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
         </l2t-paper-slider>
-        <div class="button-flex">
-          <paper-button onclick="addSlide()">Add</paper-button>
-          <paper-button onclick="remSlide()">Remove</paper-button>
-          <paper-button onclick="toggleNav('.reinit-demo')">Toggle nav</paper-button>
-          <paper-button onclick="toggleSwipe('.reinit-demo')">Toggle swipe</paper-button>
-        </div>
-      </template>
-    </demo-snippet>
-    <demo-snippet><b>Javascript</b> (To make the buttons tidier)
-      <template>
-        <script>
-          function addSlide() {
-            var selector = document.querySelector('.reinit-demo');
-            var node = document.createElement("paper-slide");
-            var textnode = document.createTextNode("#"+(selector.totalSlides + 1));
-            node.appendChild(textnode);
-            node.classList.add('paper-slide-green');
-            node.classList.add('demo-style');
-            selector.querySelector('#container').querySelector(".slider__slides").appendChild(node);
-            ++selector.totalSlides;
-          };
+      </div>
+    </template>
+  </demo-snippet>
+  <demo-snippet>
+    <b>Styling:</b> (This needs to be in the head section)
+    <template>
+      <custom-style>
+        <style is="custom-style">
+          .custom {
+            --paper-slide-width: 300px;
+            --paper-slide-height: 300px;
+            --paper-slide-dot: rgba(120, 144, 156, .8);
+            --paper-slide-dot-selected: rgba(38, 50, 56, 1);
+          }
+        </style>
+      </custom-style>
+    </template>
+  </demo-snippet>
+  <br>
+  <br>
+  <demo-snippet>
+    <b>Example with button controls and position tag:</b>
+    <br>
+    <br>
+    <template>
+      <div class="container">
+        <l2t-paper-slider class="moveControl" position="2">
+          <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=C5CAE9&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
+          <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=FFF9C4&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
+          <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=DCEDC8&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
+          <paper-slide style="background-image: url('https://placeholdit.imgix.net/~text?txtsize=28&bg=FFCCBC&txtclr=212121&txt=300%C3%97300&w=300&h=300&fm=png');"></paper-slide>
+        </l2t-paper-slider>
+        <paper-button class="proceed" onclick="document.querySelector('.moveControl').movePrev();">Previous</paper-button>
+        <paper-button class="proceed" onclick="document.querySelector('.moveControl').moveNext();">Next</paper-button>
+      </div>
+    </template>
+  </demo-snippet>
+  <demo-snippet>
+    <b>Styling:</b> (This needs to be in the head section)
+    <template>
+      <custom-style>
+        <style is="custom-style">
+          .moveControl {
+            --paper-slide-width: 300px;
+            --paper-slide-height: 300px;
+            --paper-slide-dot: rgba(120, 144, 156, .8);
+            --paper-slide-dot-selected: rgba(38, 50, 56, 1);
+          }
+        </style>
+      </custom-style>
+    </template>
+  </demo-snippet>
+  <br>
+  <br>
+  <demo-snippet>
+    <b>Updating your slides on the fly:</b>
+    <br>
+    <br>
+    <template>
+      <l2t-paper-slider class="reinit-demo">
+        <paper-slide class="paper-slide-green demo-style">#1</paper-slide>
+        <paper-slide class="paper-slide-green demo-style">#2</paper-slide>
+      </l2t-paper-slider>
+      <div class="button-flex">
+        <paper-button onclick="addSlide()">Add</paper-button>
+        <paper-button onclick="remSlide()">Remove</paper-button>
+        <paper-button onclick="toggleNav('.reinit-demo')">Toggle nav</paper-button>
+        <paper-button onclick="toggleSwipe('.reinit-demo')">Toggle swipe</paper-button>
+      </div>
+    </template>
+  </demo-snippet>
+  <demo-snippet>
+    <b>Javascript</b> (To make the buttons tidier)
+    <template>
+      <script>
+        function addSlide() {
+          var selector = document.querySelector('.reinit-demo');
+          var node = document.createElement("paper-slide");
+          var textnode = document.createTextNode("#" + (selector.totalSlides + 1));
+          node.appendChild(textnode);
+          node.classList.add('paper-slide-green');
+          node.classList.add('demo-style');
+          selector.shadowRoot.querySelector('#container').querySelector(".slider__slides").appendChild(node);
+          ++selector.totalSlides;
+        }
 
-          function remSlide() {
-            var selector = document.querySelector('.reinit-demo');
-            var slides = selector.querySelector('#container').querySelector(".slider__slides");
-            var lastSlide = slides.lastElementChild;
-            slides.removeChild(lastSlide);
-            --selector.totalSlides;
-            if (selector.position >= selector.totalSlides) {
-              selector.movePos((selector.totalSlides -1));
-            }
-          };
+        function remSlide() {
+          var selector = document.querySelector('.reinit-demo');
+          var slides = selector.shadowRoot.querySelector('#container').querySelector(".slider__slides");
+          var lastSlide = slides.lastElementChild;
+          slides.removeChild(lastSlide);
+          --selector.totalSlides;
+          if (selector.position >= selector.totalSlides) {
+            selector.movePos((selector.totalSlides - 1));
+          }
+        }
 
-          function toggleNav(id) {
-            var selector = document.querySelector(id);
-            selector.hideNav = !(selector.hideNav);
-          };
+        function toggleNav(id) {
+          var selector = document.querySelector(id);
+          selector.hideNav = !(selector.hideNav);
+        }
 
-          function toggleSwipe(id) {
-            var selector = document.querySelector(id);
-            selector.disableSwipe = !(selector.disableSwipe);
-          };
-        </script>
-      </template>
-    </demo-snippet>
-  </body>
+        function toggleSwipe(id) {
+          var selector = document.querySelector(id);
+          selector.disableSwipe = !(selector.disableSwipe);
+        }
+      </script>
+    </template>
+  </demo-snippet>
+</body>
+
 </html>
