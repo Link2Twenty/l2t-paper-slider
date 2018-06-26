@@ -1,0 +1,38 @@
+{
+  "name": "@xpertsea/paper-slider",
+  "description": "Polymer element for displaying slides in a carousel",
+  "version": "3.0.0",
+  "author": "Andrew Bone <AndrewB05@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/Link2Twenty/l2t-paper-slider",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Link2Twenty/l2t-paper-slider.git"
+  },
+  "keywords": [
+    "Polymer",
+    "carousel",
+    "web-components"
+  ],
+  "main": "l2t-paper-slider.js",
+  "dependencies": {
+    "@polymer/polymer": "^3.0.0",
+    "@polymer/iron-a11y-keys-behavior": "^3.0.0-pre.18"
+  },
+  "devDependencies": {
+    "@polymer/iron-component-page": "^3.0.0-pre.18",
+    "@polymer/iron-demo-helpers": "^3.0.0-pre.18",
+    "@polymer/iron-flex-layout": "^3.0.0-pre.18",
+    "@polymer/iron-icon": "^3.0.0-pre.18",
+    "@polymer/iron-validator-behavior": "^3.0.0-pre.18",
+    "@polymer/paper-icon-button": "^3.0.0-pre.18",
+    "@polymer/paper-button": "^3.0.0-pre.18",
+    "@webcomponents/webcomponentsjs": "^2.0.0",
+    "wct-browser-legacy": "^1.0.1",
+    "web-component-tester": "^6.6.0"
+  },
+  "scripts": {
+    "predoc": "polymer analyze > analysis.json",
+    "doc": "polymer serve -o"
+  }
+}
